@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Head from "next/head";
-import { Navbar } from "@/components/Navbar";
-import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: "BEM STTI Sony Sugema",
@@ -22,15 +20,8 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </Head>
-      <body className="antialiased bg-white text-gray-900 font-sans min-h-screen flex flex-col">
-        <Navbar />
-
-        {/* Konten utama harus grow supaya dorong footer ke bawah */}
-        <main className="flex-grow">
-          {children}
-        </main>
-
-        <Footer />
+      <body className="antialiased bg-white text-gray-900 font-sans">
+        {children}
       </body>
     </html>
   );
