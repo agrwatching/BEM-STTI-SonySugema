@@ -9,28 +9,30 @@ export function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
 
   return (
-    <nav className="bg-[#001f3f] shadow-md mt-4 mx-4 sm:mx-6 lg:mx-20 xl:mx-32 rounded-xl font-sans">
-      <div className="max-w-6xl mx-auto px-4 py-6 flex items-center justify-between">
+    <nav className="bg-[#001f3f] shadow-md sticky top-0 z-[999] w-full font-sans">
+      <div className="px-4 sm:px-6 lg:px-20 xl:px-32 py-6 flex items-center justify-between">
         {/* Logo kiri */}
+        <Link href="/">
         <div className="flex items-center space-x-3">
           <Image
             src="/logo_senat.png"
             alt="Logo Senat"
-            width={60}
-            height={60}
+            width={50}
+            height={50}
             priority
           />
-          <div className="flex flex-col leading-tight">
-            <span className="text-[17px] font-semibold text-white text-2xl">
+          <div className="leading-tight">
+            
+            <span className="text-xl sm:text-2xl font-semibold text-white">
               Senat Mahasiswa
             </span>
-            <span className="text-sm text-gray-200 -mt-[2px]">
+            <div className="text-sm text-gray-200 -mt-1">
               STTI Sony Sugema
-            </span>
+            </div>
           </div>
         </div>
-
-        {/* Tombol burger */}
+        </Link>
+        {/* Tombol burger mobile */}
         <div className="md:hidden">
           <button
             onClick={() => setIsOpen(true)}
@@ -40,15 +42,15 @@ export function Navbar() {
           </button>
         </div>
 
-        {/* Menu kanan untuk desktop */}
+        {/* Menu kanan desktop */}
         <div className="hidden md:flex space-x-6">
-          <Link href="/" className="text-white hover:bg-gray-500 p-2 rounded transition text-2xl">
+          <Link href="/" className="text-white hover:bg-white/20 px-3 py-2 rounded transition text-lg">
             Beranda
           </Link>
-          <Link href="/proker" className="text-white hover:bg-gray-500 p-2 rounded transition text-2xl">
+          <Link href="/proker" className="text-white hover:bg-white/20 px-3 py-2 rounded transition text-lg">
             Program Kerja
           </Link>
-          <Link href="/login" className="text-white hover:bg-gray-500 p-2 rounded transition text-2xl">
+          <Link href="/login" className="text-white hover:bg-white/20 px-3 py-2 rounded transition text-lg">
             Login
           </Link>
         </div>
@@ -56,7 +58,7 @@ export function Navbar() {
 
       {/* Fullscreen Mobile Menu */}
       <div
-        className={`fixed inset-0 bg-[#001f3f] z-40 flex flex-col items-center justify-center gap-6 text-xl text-white transform transition-transform duration-300 ease-in-out ${
+        className={`fixed inset-0 bg-[#001f3f] z-[998] flex flex-col items-center justify-center gap-6 text-xl text-white transform transition-transform duration-300 ease-in-out ${
           isOpen ? 'translate-y-0' : '-translate-y-full'
         }`}
       >
