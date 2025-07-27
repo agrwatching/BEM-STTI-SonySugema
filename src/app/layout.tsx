@@ -5,8 +5,11 @@ import { Navbar } from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "BEM STTI Sony Sugema",
-  description: "Website resmi Badan Eksekutif Mahasiswa STTI SS",
+  title: "Senat STTI Sony Sugema",
+  description: "Website resmi Badan Eksekutif Mahasiswa STTI Sony Sugema",
+  icons: {
+    icon: "/logo_senat.ico",
+  },
 };
 
 export default function RootLayout({
@@ -24,7 +27,6 @@ export default function RootLayout({
       </Head>
       <body className="antialiased bg-white text-gray-900 font-sans min-h-screen flex flex-col">
         <Navbar />
-
         {/* Konten utama harus grow supaya dorong footer ke bawah */}
         <main className="flex-grow">
           {children}

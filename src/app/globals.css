@@ -53,3 +53,75 @@ body {
   }
 }
 
+/* Neon border animation untuk logo senat di navbar*/
+.neon-hover {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.neon-hover::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  background: conic-gradient(
+    from 0deg,
+    #9333ea,
+    #3b82f6,
+    #06b6d4,
+    #9333ea
+  );
+  border-radius: 0.5rem; /* rounded-md */
+  padding: 2px;
+  mask: 
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  -webkit-mask-composite: destination-out;
+  animation: neon-rotate 4s linear infinite;
+  z-index: -1;
+  transition: opacity 0.3s ease;
+  opacity: 0;
+}
+
+.neon-hover:hover::before {
+  opacity: 1;
+}
+
+@keyframes neon-rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Neon border animation untuk tombol di navbar */
+
+/* Neon border untuk border spech */
+.neon-border {
+  position: relative;
+  padding: 2px; /* untuk memberi ruang border */
+  border-radius: 1rem; /* sama dengan rounded-2xl */
+  background: linear-gradient(270deg, #8b5cf6, #4f46e5, #9333ea, #3b0764);
+  background-size: 600% 600%;
+  animation: neon-border-glow 6s linear infinite;
+}
+
+.neon-border-inner {
+  border-radius: 0.875rem; /* lebih kecil dari luar agar nggak overlap */
+  background-color: white;
+  padding: 2.5rem 1.5rem;
+}
+
+@keyframes neon-border-glow {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Neon border untuk tombol di navbar */

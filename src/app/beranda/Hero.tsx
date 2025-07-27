@@ -15,7 +15,7 @@ export default function Hero() {
           modules={[Navigation, Pagination, Autoplay]}
           navigation
           pagination={{ clickable: true }}
-          autoplay={{ delay: 3000 }}
+          autoplay={{ delay: 6000 }}
           loop={true}
           className="w-full h-full"
         >
