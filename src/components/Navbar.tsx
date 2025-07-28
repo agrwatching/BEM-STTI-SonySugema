@@ -10,7 +10,7 @@ export function Navbar() {
 
   return (
     <nav className="bg-[#001f3f] sticky top-0 z-[999] w-full font-sans">
-      <div className="px-4 sm:px-6 lg:px-20 py-4 flex items-center justify-between">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-20 py-4 flex items-center justify-between">
         {/* Logo kiri */}
         <Link href="/">
           <div className="flex items-center space-x-3 p-2 rounded-md transition-transform duration-300 transform hover:scale-105 neon-hover cursor-pointer">
@@ -43,29 +43,24 @@ export function Navbar() {
         </div>
 
         {/* Menu kanan desktop */}
-        <div className="hidden md:flex flex-wrap justify-center gap-4 max-w-full overflow-x-hidden py-4 px-4">
-
-          <Link href="/" className="text-white px-3 py-2 rounded transition text-lg bg-indigo-700 border-2 hover:border-[#d946ef] hover:bg-indigo-900 hover:scale-105 hover:-rotate-2 hover:shadow-[0_4px_12px_0_#d946ef]">
-            Beranda
-          </Link>
-          <Link href="/" className="text-white px-3 py-2 rounded transition text-lg bg-indigo-700 border-2 hover:border-[#d946ef] hover:bg-indigo-900 hover:scale-105 hover:-rotate-2 hover:shadow-[0_4px_12px_0_#d946ef]">
-            Struktur Organisasi
-          </Link>
-          <Link href="/proker" className="text-white px-3 py-2 rounded transition text-lg bg-indigo-700 border-2 hover:border-[#d946ef] hover:bg-indigo-900 hover:scale-105 hover:-rotate-2 hover:shadow-[0_4px_12px_0_#d946ef]">
-            Program Kerja
-          </Link>
-           <Link href="/proker" className="text-white px-3 py-2 rounded transition text-lg bg-indigo-700 border-2 hover:border-[#d946ef] hover:bg-indigo-900 hover:scale-105 hover:-rotate-2 hover:shadow-[0_4px_12px_0_#d946ef]">
-            Galeri
-          </Link>
-           <Link href="/proker" className="text-white px-3 py-2 rounded transition text-lg bg-indigo-700 border-2 hover:border-[#d946ef] hover:bg-indigo-900 hover:scale-105 hover:-rotate-2 hover:shadow-[0_4px_12px_0_#d946ef]">
-            Artikel Mahasiswa
-          </Link>
-          <Link href="/proker" className="text-white px-3 py-2 rounded transition text-lg bg-indigo-700 border-2 hover:border-[#d946ef] hover:bg-indigo-900 hover:scale-105 hover:-rotate-2 hover:shadow-[0_4px_12px_0_#d946ef]">
-            Ruang Diskusi
-          </Link>
-          <Link href="/proker" className="text-white px-3 py-2 rounded transition text-lg bg-indigo-700 border-2 hover:border-[#d946ef] hover:bg-indigo-900 hover:scale-105 hover:-rotate-2 hover:shadow-[0_4px_12px_0_#d946ef]">
-            Kontak Kami
-          </Link>
+        <div className="hidden md:flex flex-wrap justify-end gap-x-2 gap-y-2 max-w-full py-4 px-4 lg:flex-nowrap">
+          {[
+            { href: "/", label: "Beranda" },
+            { href: "/", label: "Struktur Organisasi" },
+            { href: "/proker", label: "Program Kerja" },
+            { href: "/proker", label: "Galeri" },
+            { href: "/proker", label: "Artikel Mahasiswa" },
+            { href: "/proker", label: "Ruang Diskusi" },
+            { href: "/proker", label: "Kontak Kami" },
+          ].map((item, i) => (
+            <Link
+              key={i}
+              href={item.href}
+              className="text-white text-sm sm:text-base px-3 py-2 min-w-fit rounded transition hover:border-[#d946ef] hover:bg-indigo-900 hover:scale-105 hover:-rotate-2 hover:shadow-[0_4px_12px_0_#d946ef]"
+            >
+              {item.label}
+            </Link>
+          ))}
         </div>
       </div>
 
