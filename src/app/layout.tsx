@@ -1,10 +1,10 @@
-import type { Metadata } from "next";
+// app/layout.tsx
 import "./globals.css";
-import Head from "next/head";
 import { Navbar } from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import Script from "next/script";
 
-export const metadata: Metadata = {
+export const metadata = {
   title: "Senat STTI Sony Sugema",
   description: "Website resmi Badan Eksekutif Mahasiswa STTI Sony Sugema",
   icons: {
@@ -19,19 +19,15 @@ export default function RootLayout({
 }) {
   return (
     <html lang="id">
-      <Head>
-        <link
-          href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
-          rel="stylesheet"
-        />
-      </Head>
       <body className="antialiased bg-white text-gray-900 font-sans min-h-screen flex flex-col">
-        <Navbar />
-        {/* Konten utama harus grow supaya dorong footer ke bawah */}
-        <main className="flex-grow">
-          {children}
-        </main>
+        {/* Tambahkan Script di sini */}
+        <Script
+          src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"
+          strategy="beforeInteractive"
+        />
 
+        <Navbar />
+        <main className="flex-grow">{children}</main>
         <Footer />
       </body>
     </html>
