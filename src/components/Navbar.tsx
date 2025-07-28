@@ -10,7 +10,7 @@ export function Navbar() {
 
   return (
     <nav className="bg-[#001f3f] sticky top-0 z-[999] w-full font-sans">
-      <div className="px-4 sm:px-6 lg:px-20  py-4 flex items-center justify-between">
+      <div className="px-4 sm:px-6 lg:px-20 py-4 flex items-center justify-between">
         {/* Logo kiri */}
         <Link href="/">
           <div className="flex items-center space-x-3 p-2 rounded-md transition-transform duration-300 transform hover:scale-105 neon-hover cursor-pointer">

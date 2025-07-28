@@ -5,7 +5,7 @@ export default function Speech() {
     <section className="bg-black py-20 px-6 sm:px-10 md:px-16 lg:px-24 xl:px-32 overflow-x-hidden">
       <div className="max-w-6xl mx-auto">
         {/* Neon Border Container */}
-        <div className="neon-border hover:shadow-[0_4px_12px_0_#d946ef]">
+        <div className="neon-border border-[#d946ef] border-4 hover:shadow-[0_4px_12px_0_#d946ef]">
           <div className="neon-border-inner">
             {/* Judul */}
             <h2 className="text-3xl font-bold text-blue-900 mb-8 text-center">
@@ -34,7 +34,7 @@ export default function Speech() {
               </div>
 
               {/* Teks Sambutan */}
-              <div className="flex-1 text-gray-800 text-2xl leading-relaxed text-justify">
+              <div className="flex-1 text-gray-800 md:text-2xl text-xl leading-relaxed text-justify">
                 <p>
                   <span className="font-semibold text-blue-900">
                     Assalamu’alaikum Warahmatullahi Wabarakatuh.
