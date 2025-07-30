@@ -7,9 +7,11 @@ import { motion } from "framer-motion";
 // Biar TypeScript gak error pas akses particlesJS
 declare global {
   interface Window {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     particlesJS: any;
   }
 }
+
 
 const strukturData = {
   ketua: {

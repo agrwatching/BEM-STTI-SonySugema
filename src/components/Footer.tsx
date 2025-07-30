@@ -1,7 +1,8 @@
 'use client'
 
 import Image from "next/image"
-import { FaInstagram, FaTiktok } from "react-icons/fa6" // Gunakan react-icons/fa6 untuk ikon TikTok
+import Link from "next/link"
+import { FaInstagram, FaTiktok } from "react-icons/fa6"
 
 export default function Footer() {
   return (
@@ -27,9 +28,15 @@ export default function Footer() {
         <div>
           <h3 className="md:text-2xl text-xl font-semibold mb-4">Navigasi</h3>
           <ul className="space-y-2 text-gray-300 md:text-xl text-lg">
-            <li><a href="/" className="hover:text-white transition">Beranda</a></li>
-            <li><a href="/proker" className="hover:text-white transition">Program Kerja</a></li>
-            <li><a href="/login" className="hover:text-white transition">Login Admin</a></li>
+            <li>
+              <Link href="/" className="hover:text-white transition">Beranda</Link>
+            </li>
+            <li>
+              <Link href="/proker" className="hover:text-white transition">Program Kerja</Link>
+            </li>
+            <li>
+              <Link href="/login" className="hover:text-white transition">Login Admin</Link>
+            </li>
           </ul>
         </div>
 
