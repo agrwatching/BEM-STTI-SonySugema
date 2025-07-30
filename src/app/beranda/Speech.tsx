@@ -12,7 +12,8 @@ declare global {
 }
 
 export default function Speech() {
-  useEffect(() => {
+useEffect(() => {
+  const initParticles = () => {
     if (window.particlesJS) {
       window.particlesJS("particles-speech", {
         particles: {
@@ -34,13 +35,18 @@ export default function Speech() {
           },
         },
       });
+    } else {
+      setTimeout(initParticles, 100); // Tunggu sampai particlesJS siap
     }
+  };
 
-    return () => {
-      const canvas = document.querySelector("#particles-speech canvas");
-      canvas?.parentNode?.removeChild(canvas);
-    };
-  }, []);
+  initParticles();
+
+  return () => {
+    const canvas = document.querySelector("#particles-speech canvas");
+    canvas?.parentNode?.removeChild(canvas);
+  };
+}, []);
 
   return (
     <section className="relative bg-black py-16 px-4 sm:px-8 md:px-16 xl:px-32 overflow-hidden">

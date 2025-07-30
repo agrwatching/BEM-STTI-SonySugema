@@ -76,39 +76,45 @@ const Card = ({
 );
 
 const StrukturOrganisasi = () => {
-  useEffect(() => {
+useEffect(() => {
+  const initParticles = () => {
     if (window.particlesJS) {
-      window.particlesJS("particles-struktur", {
+      window.particlesJS("particles-org", {
         particles: {
-          number: { value: 12 }, // lebih ringan
+          number: { value: 20 },
           color: { value: "#ffffff" },
           shape: { type: "circle" },
-          opacity: { value: 0.4 },
-          size: { value: 1.5 },
+          opacity: { value: 0.3 },
+          size: { value: 1.2 },
           move: {
             enable: true,
-            speed: 0.3,
+            speed: 0.2,
             direction: "none",
             out_mode: "bounce",
           },
         },
         interactivity: {
           events: {
-            onhover: { enable: false }, // hilangkan efek berat
+            onhover: { enable: false },
           },
         },
       });
+    } else {
+      setTimeout(initParticles, 100); // tunggu sampai particlesJS siap
     }
+  };
 
-    return () => {
-      const canvas = document.querySelector("#particles-struktur canvas");
-      canvas?.parentNode?.removeChild(canvas);
-    };
-  }, []);
+  initParticles();
+
+  return () => {
+    const canvas = document.querySelector("#particles-org canvas");
+    canvas?.parentNode?.removeChild(canvas);
+  };
+}, []);
 
   return (
     <div className="relative min-h-screen w-full py-16 px-4 overflow-hidden bg-black text-white">
-      <div id="particles-struktur" className="absolute inset-0 z-0" />
+      <div id="particles-org" className="absolute inset-0 z-0" />
 
       <div className="relative z-10 max-w-6xl mx-auto text-center">
         <h2 className="text-3xl md:text-5xl font-bold mb-10 drop-shadow">

@@ -72,8 +72,8 @@ export default function ProgramKerja() {
                 key={index}
                 className="bg-white/10 border border-white/20 rounded-xl p-6 backdrop-blur-md shadow"
               >
-                <h3 className="text-xl font-semibold mb-2">{proker.nama}</h3>
-                <p className="text-white/80 text-sm">{proker.deskripsi}</p>
+                <h3 className="text-xl md:text-2xl font-semibold mb-2">{proker.nama}</h3>
+                <p className="text-white/80 text-sm md:text-xl">{proker.deskripsi}</p>
               </div>
             ))}
           </div>
@@ -96,8 +96,8 @@ export default function ProgramKerja() {
                       key={j}
                       className="bg-white/10 border border-white/20 rounded-xl p-4 backdrop-blur-md shadow"
                     >
-                      <h4 className="text-lg font-semibold mb-1">{proker.nama}</h4>
-                      <p className="text-white/80 text-sm">{proker.deskripsi}</p>
+                      <h4 className="text-lg md:text-2xl font-semibold mb-1">{proker.nama}</h4>
+                      <p className="text-white/80 text-sm md:text-xl">{proker.deskripsi}</p>
                     </div>
                   ))}
                 </div>
