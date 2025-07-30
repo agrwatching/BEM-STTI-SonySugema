@@ -4,6 +4,7 @@
 import Hero from './beranda/Hero'
 import AboutSenat from './beranda/AboutSenat'
 import Speech from './beranda/Speech'
+import Komentar from './beranda/Komentar'
 
 export default function Home() {
   return (
@@ -11,6 +12,7 @@ export default function Home() {
       <Hero />
       <AboutSenat />
       <Speech />
+      <Komentar />
     </main>
   )
 }

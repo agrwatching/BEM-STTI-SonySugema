@@ -17,7 +17,7 @@ export default function Hero() {
   }, [])
 
   return (
-    <section className="relative w-full aspect-[18/9] overflow-hidden z-10">
+    <section className="relative w-full aspect-[16/9] overflow-hidden z-10">
       {/* Background Images */}
       {images.map((src, index) => (
         <Image
@@ -33,19 +33,25 @@ export default function Hero() {
 
       {/* Overlay */}
       <div className="absolute inset-0 bg-black/60 z-20 flex items-center justify-center text-center px-4 pb-12 md:pb-28">
-        <div className="max-w-3xl">
-          <p className="text-white text-base md:text-xl mb-2 font-extrabold tracking-wide uppercase">
+        <div className="max-w-5xl">
+          <p className="text-white text-xs md:text-2xl md:mb-4 mb-0 font-extrabold tracking-wide uppercase">
             Senat STTI Sony Sugema 2025
           </p>
-          <h1 className="text-white text-3xl md:text-5xl font-extrabold">
-            KABINET <span className="text-red-500">TUNAS LANGIT</span>
+          <h1 className="text-white text-3xl md:text-7xl font-extrabold">
+            KABINET <span className="bg-gradient-to-r from-green-400 via-cyan-400 to-blue-500 text-transparent bg-clip-text drop-shadow-md">
+                      TUNAS LANGIT
+                    </span>
           </h1>
-          <p className="text-gray-200 mt-3 text-base md:text-lg">
+          <p className="text-gray-200 md:mt-6 mt-0 text-sm md:text-lg px-4 md:px-0">
             Bergerak Bersama, Mewujudkan Dampak Nyata untuk Mahasiswa & Kampus
           </p>
-          <button className="mt-6 bg-red-500 hover:bg-red-600 text-white px-6 py-2 rounded-full text-sm md:text-base font-semibold shadow-lg transition duration-300">
-            Jelajahi Lebih Lanjut
-          </button>
+          <a href="#about">
+            <button className="mt-6 bg-gradient-to-r from-blue-400 via-cyan-400 to-teal-400 hover:brightness-110 text-white px-6 py-2 rounded-full text-sm md:text-base font-semibold shadow-lg transition duration-300 drop-shadow-md">
+              Jelajahi Lebih Lanjut
+            </button>
+          </a>
+
+
         </div>
       </div>
     </section>

@@ -1,92 +1,69 @@
-// app/(beranda)/beranda/komentar.tsx
-'use client';
-
-import { useSession, signIn, signOut } from 'next-auth/react';
-import { useState, useEffect } from 'react';
-import Image from 'next/image';
+"use client";
 
 export default function Komentar() {
-  const { data: session, status } = useSession();
-  const [komentar, setKomentar] = useState([]);
-  const [isiKomentar, setIsiKomentar] = useState('');
-
-  // Fetch komentar dari backend
-  useEffect(() => {
-    fetch('/api/komentar')
-      .then(res => res.json())
-      .then(data => setKomentar(data));
-  }, []);
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!isiKomentar) return;
-
-    const res = await fetch('/api/komentar', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        komentar: isiKomentar,
-      }),
-    });
-
-    if (res.ok) {
-      const newKomentar = await res.json();
-      setKomentar(prev => [newKomentar, ...prev]);
-      setIsiKomentar('');
-    }
-  };
+  const komentarDummy = [
+    {
+      nama: "Agus Wijaya",
+      komentar: "Webnya keren banget!",
+      waktu: "2 jam lalu",
+      foto: "https://i.pravatar.cc/40?img=1",
+    },
+    {
+      nama: "Sari Dewi",
+      komentar: "Semangat untuk Senat Mahasiswa STTI!",
+      waktu: "1 hari lalu",
+      foto: "https://i.pravatar.cc/40?img=2",
+    },
+  ];
 
   return (
-    <section className="bg-white py-20 px-4">
-      <div className="max-w-3xl mx-auto">
-        <h2 className="text-3xl font-bold mb-6 text-center text-black">Komentar</h2>
+    <section className="py-16 px-4 bg-gray-100" id="komentar">
+      <div className="max-w-3xl mx-auto text-center">
+        <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-2">
+          Komentar & Dukungan
+        </h2>
+        <p className="text-gray-600 mb-8">
+          Bagikan dukungan dan pemikiran Anda untuk program ini
+        </p>
 
-        {/* Form Komentar */}
-        {status === 'authenticated' ? (
-          <form onSubmit={handleSubmit} className="mb-8">
-            <textarea
-              className="w-full p-4 border rounded-lg shadow-sm"
-              placeholder="Tulis komentar..."
-              value={isiKomentar}
-              onChange={(e) => setIsiKomentar(e.target.value)}
-            />
-            <button
-              type="submit"
-              className="mt-2 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-            >
-              Kirim
-            </button>
-          </form>
-        ) : (
-          <div className="text-center mb-8">
-            <p className="mb-2">Login untuk berkomentar</p>
-            <button
-              onClick={() => signIn('google')}
-              className="px-4 py-2 bg-red-500 text-white rounded"
-            >
+        {/* Card Login */}
+        <div className="bg-white rounded-xl shadow p-6 sm:p-8 mb-10">
+          <div className="flex flex-col items-center justify-center space-y-4">
+            <span className="text-[60px]">💬</span>
+            <h3 className="text-lg sm:text-xl font-semibold">
+              Login untuk Berkomentar
+            </h3>
+            <p className="text-sm text-gray-600">
+              Silakan login terlebih dahulu untuk memberikan komentar
+            </p>
+            <button className="bg-blue-500 hover:bg-green-500 text-white px-5 py-2 rounded-lg font-medium transition duration-300">
               Login dengan Google
             </button>
           </div>
-        )}
+        </div>
 
         {/* List Komentar */}
-        <div className="space-y-6">
-          {komentar.map((k, i) => (
-            <div key={i} className="flex items-start gap-4 border-b pb-4">
-              <Image
-                src={k.image || '/default-avatar.png'}
-                alt={k.name}
-                width={40}
-                height={40}
-                className="rounded-full"
-              />
-              <div>
-                <p className="font-semibold">{k.name}</p>
-                <p className="text-sm text-gray-500">{new Date(k.createdAt).toLocaleString()}</p>
-                <p className="mt-1 text-gray-800">{k.komentar}</p>
+        <div className="bg-white rounded-xl shadow p-6 sm:p-8 text-left">
+          <h4 className="text-lg font-semibold mb-4">Komentar yang masuk:</h4>
+          <div className="space-y-4">
+            {komentarDummy.map((komentar, index) => (
+              <div
+                key={index}
+                className="flex items-start space-x-4 bg-blue-50 p-4 rounded-lg shadow-sm"
+              >
+                <img
+                  src={komentar.foto}
+                  alt={komentar.nama}
+                  className="w-10 h-10 rounded-full"
+                />
+                <div>
+                  <p className="font-semibold">{komentar.nama}</p>
+                  <p className="text-sm text-gray-600">{komentar.waktu}</p>
+                  <p className="mt-1">{komentar.komentar}</p>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </section>

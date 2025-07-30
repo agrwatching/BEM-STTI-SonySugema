@@ -10,7 +10,7 @@ export function Navbar() {
 
   return (
     <nav className="bg-[#001f3f] sticky top-0 z-[999] w-full font-sans">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-20 py-4 flex items-center justify-between">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-20 md:py-4 py-1 flex items-center justify-between">
         {/* Logo kiri */}
         <Link href="/">
           <div className="flex items-center space-x-3 p-2 rounded-md transition-transform duration-300 transform hover:scale-105 neon-hover cursor-pointer">
@@ -46,7 +46,7 @@ export function Navbar() {
         <div className="hidden md:flex flex-wrap justify-end gap-x-2 gap-y-2 max-w-full py-4 px-4 lg:flex-nowrap">
           {[
             { href: "/", label: "Beranda" },
-            { href: "/", label: "Struktur Organisasi" },
+            { href: "/struktur", label: "Struktur Organisasi" },
             { href: "/proker", label: "Program Kerja" },
             { href: "/proker", label: "Galeri" },
             { href: "/proker", label: "Artikel Mahasiswa" },

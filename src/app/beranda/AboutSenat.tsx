@@ -47,7 +47,7 @@ function AnimatedBox({
 export default function AboutSenat() {
   return (
     <section
-      className="bg-white py-20 px-6 sm:px-10 md:px-16 lg:px-24 xl:px-32 overflow-x-hidden"
+      className="bg-white py-20 md:pt-40 pt-0 px-6 sm:px-10 md:px-16 lg:px-24 xl:px-32 overflow-x-hidden"
       id="about"
     >
       <div className="max-w-8xl mx-auto">

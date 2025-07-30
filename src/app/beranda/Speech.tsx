@@ -6,7 +6,8 @@ import { motion } from "framer-motion";
 
 // Deklarasi agar TypeScript tahu tentang particlesJS dari window
 declare global {
-  interface Window {
+   interface Window {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
     particlesJS: any;
   }
 }
@@ -65,7 +66,7 @@ export default function Speech() {
               </h2>
 
               <div className="flex flex-col md:flex-row gap-4 items-start">
-                <div className="w-[90px] sm:w-[110px] md:w-1/3 mx-auto md:mx-0 flex flex-col items-center">
+                <div className="w-[90px] sm:w-[110px] md:w-1/4 mx-auto md:mx-0 flex flex-col items-center">
                   <div className="w-full aspect-[3/4] relative">
                     <Image
                       src="/pp.jpg"
@@ -83,7 +84,7 @@ export default function Speech() {
                   </p>
                 </div>
 
-                <div className="flex-1 text-gray-800 text-xs sm:text-sm md:text-2xl leading-relaxed text-justify">
+                <div className="flex-1 text-gray-800 text-xs sm:text-sm md:text-xl leading-relaxed text-justify">
                   <p>
                     <span className="font-semibold text-blue-900">
                       Assalamu’alaikum Warahmatullahi Wabarakatuh.
