@@ -3,7 +3,7 @@ import "./globals.css";
 import Head from "next/head";
 
 export const metadata: Metadata = {
-  title: "BEM STTI Sony Sugema",
+  title: "Senat STTI Sony Sugema",
   description: "Website resmi Badan Eksekutif Mahasiswa STTI SS",
 };
 

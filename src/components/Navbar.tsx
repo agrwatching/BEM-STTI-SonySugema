@@ -8,6 +8,16 @@ import { Menu, X } from "lucide-react"
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
 
+  const navItems = [
+    { href: "/", label: "Beranda" },
+    { href: "/struktur", label: "Struktur Organisasi" },
+    { href: "/proker", label: "Program Kerja" },
+    { href: "/galeri", label: "Galeri" },
+    { href: "/artikel", label: "Artikel Mahasiswa" },
+    { href: "/diskusi", label: "Ruang Diskusi" },
+    { href: "/kontak", label: "Kontak Kami" },
+  ]
+
   return (
     <nav className="bg-[#001f3f] sticky top-0 z-[999] w-full font-sans">
       <div className="container mx-auto px-4 sm:px-6 lg:px-20 md:py-4 py-1 flex items-center justify-between">
@@ -44,15 +54,7 @@ export function Navbar() {
 
         {/* Menu kanan desktop */}
         <div className="hidden md:flex flex-wrap justify-end gap-x-2 gap-y-2 max-w-full py-4 px-4 lg:flex-nowrap">
-          {[
-            { href: "/", label: "Beranda" },
-            { href: "/struktur", label: "Struktur Organisasi" },
-            { href: "/proker", label: "Program Kerja" },
-            { href: "/proker", label: "Galeri" },
-            { href: "/proker", label: "Artikel Mahasiswa" },
-            { href: "/proker", label: "Ruang Diskusi" },
-            { href: "/proker", label: "Kontak Kami" },
-          ].map((item, i) => (
+          {navItems.map((item, i) => (
             <Link
               key={i}
               href={item.href}
@@ -66,7 +68,7 @@ export function Navbar() {
 
       {/* Fullscreen Mobile Menu */}
       <div
-        className={`fixed inset-0 bg-[#001f3f] z-[998] flex flex-col items-center justify-center gap-6 text-xl text-white transform transition-transform duration-300 ease-in-out ${
+        className={`fixed inset-0 bg-[#001f3f] z-[998] flex flex-col items-center justify-center px-6 py-10 text-white transform transition-transform duration-300 ease-in-out ${
           isOpen ? 'translate-y-0' : '-translate-y-full'
         }`}
       >
@@ -76,9 +78,20 @@ export function Navbar() {
         >
           <X size={30} />
         </button>
-        <Link href="/" onClick={() => setIsOpen(false)} className="text-white hover:text-blue-300 transition">Beranda</Link>
-        <Link href="/proker" onClick={() => setIsOpen(false)} className="text-white hover:text-blue-300 transition">Program Kerja</Link>
-        <Link href="/login" onClick={() => setIsOpen(false)} className="text-white hover:text-blue-300 transition">Login</Link>
+
+        {/* Mobile menu tanpa hover/animasi */}
+        <div className="flex flex-col gap-4 w-full items-center">
+          {navItems.map((item, i) => (
+            <Link
+              key={i}
+              href={item.href}
+              onClick={() => setIsOpen(false)}
+              className="w-full text-center text-lg sm:text-xl px-4 py-2 rounded text-white border-[#d946ef] bg-indigo-900 hover:shadow-[0_4px_12px_0_#d946ef]"
+            >
+              {item.label}
+            </Link>
+          ))}
+        </div>
       </div>
     </nav>
   )
