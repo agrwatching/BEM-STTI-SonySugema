@@ -2,7 +2,8 @@
 
 import Image from "next/image"
 import Link from "next/link"
-import { FaInstagram, FaTiktok } from "react-icons/fa6"
+import { Mail, Instagram } from "lucide-react"
+import { FaWhatsapp, FaTiktok } from "react-icons/fa6"
 
 export default function Footer() {
   return (
@@ -25,45 +26,66 @@ export default function Footer() {
         </div>
 
         {/* Kolom 2: Navigasi */}
-        <div>
+        <div className="text-left">
           <h3 className="md:text-2xl text-xl font-semibold mb-4">Navigasi</h3>
-          <ul className="space-y-2 text-gray-300 md:text-xl text-lg">
-            <li>
-              <Link href="/" className="hover:text-white transition">Beranda</Link>
-            </li>
-            <li>
-              <Link href="/proker" className="hover:text-white transition">Program Kerja</Link>
-            </li>
-            <li>
-              <Link href="/login" className="hover:text-white transition">Login Admin</Link>
-            </li>
-          </ul>
+          <div className="grid grid-cols-2 gap-x-4 gap-y-3 text-gray-300 md:text-xl text-lg">
+            <Link href="/" className="hover:text-white transition">Beranda</Link>
+            <Link href="/struktur-organisasi" className="hover:text-white transition">Struktur Organisasi</Link>
+            <Link href="/proker" className="hover:text-white transition">Program Kerja</Link>
+            <Link href="/galeri" className="hover:text-white transition">Galeri</Link>
+            <Link href="/artikel" className="hover:text-white transition">Artikel Mahasiswa</Link>
+            <Link href="/diskusi" className="hover:text-white transition">Ruang Diskusi</Link>
+            <Link href="/kontak" className="hover:text-white transition">Kontak Kami</Link>
+            <Link href="/login" className="hover:text-white transition">Login</Link>
+          </div>
         </div>
 
         {/* Kolom 3: Kontak */}
         <div>
           <h3 className="md:text-2xl text-xl font-semibold mb-4">Kontak</h3>
-          <ul className="text-gray-300 md:text-xl text-lg space-y-2">
-            <li>Email: senatmahasiswa@stti-ss.ac.id</li>
-            <li>Instagram: <a href="https://instagram.com/senatsttiss" className="hover:text-white">@senatsttiss</a></li>
-            <li>Alamat: Jl. STTI No. 12, Bandung</li>
-          </ul>
-
-          {/* Ikon Sosial Media */}
-          <div className="flex gap-4 mt-4 text-2xl text-gray-300">
-            <a href="https://instagram.com/senatsttiss" target="_blank" rel="noopener noreferrer" className="hover:text-white">
-              <FaInstagram />
+          <div className="flex items-center gap-4 text-gray-300 mb-4">
+            <a
+              href="mailto:senatmahasiswa@stti-ss.ac.id"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-white transition"
+            >
+              <Mail size={24} />
             </a>
-            <a href="https://www.tiktok.com/@senatsttiss" target="_blank" rel="noopener noreferrer" className="hover:text-white">
-              <FaTiktok />
+            <a
+              href="https://instagram.com/senatsttiss"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-white transition"
+            >
+              <Instagram size={24} />
+            </a>
+            <a
+              href="https://wa.me/6285179718031"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-white transition"
+            >
+              <FaWhatsapp size={24} />
+            </a>
+            <a
+              href="https://tiktok.com/@senatmahasiswa"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-white transition"
+            >
+              <FaTiktok size={24} />
             </a>
           </div>
+          <ul className="text-gray-300 md:text-xl text-lg space-y-2">
+            <li>Alamat: Jalan Raya Lemahmulya, RT.008/RW.004, Karawang</li>
+          </ul>
         </div>
       </div>
 
       {/* Copyright */}
       <div className="border-t border-gray-700 py-5 px-3 text-center text-gray-400 text-sm md:text-lg">
-        &copy; {new Date().getFullYear()} Senat Mahasiswa STTI Sony Sugema. Dibuat dengan ❤️ oleh tim Senat.
+        &copy; {new Date().getFullYear()} Senat Mahasiswa STTI Sony Sugema.
       </div>
     </footer>
   )
