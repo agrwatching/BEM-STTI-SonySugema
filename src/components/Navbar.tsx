@@ -1,3 +1,4 @@
+// src/components/Navbar.tsx
 'use client'
 
 import Link from "next/link"
@@ -9,14 +10,15 @@ export function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
 
   const navItems = [
-    { href: "/", label: "Beranda" },
-    { href: "/struktur", label: "Struktur Organisasi" },
-    { href: "/proker", label: "Program Kerja" },
-    { href: "/galeri", label: "Galeri" },
-    { href: "/artikel", label: "Artikel Mahasiswa" },
-    { href: "/diskusi", label: "Ruang Diskusi" },
-    { href: "/kontak", label: "Kontak Kami" },
-  ]
+  { href: "/", label: "Beranda" },
+  { href: "/struktur", label: "Struktur Organisasi" },
+  { href: "/proker", label: "Program Kerja" },
+  { href: "/galeri", label: "Galeri" },
+  { href: "/artikel", label: "Artikel Mahasiswa" },
+  { href: "/diskusi", label: "Ruang Diskusi" },
+  { href: "/kontak", label: "Kontak Kami" },
+]
+
 
   return (
     <nav className="bg-[#001f3f] sticky top-0 z-[999] w-full font-sans">

@@ -25,10 +25,7 @@ export default function RootLayout({
           src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"
           strategy="beforeInteractive"
         />
-
-        <Navbar />
         <main className="flex-grow">{children}</main>
-        <Footer />
       </body>
     </html>
   );

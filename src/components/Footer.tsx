@@ -1,3 +1,4 @@
+// src/components/Footer.tsx
 'use client'
 
 import Image from "next/image"
@@ -28,15 +29,15 @@ export default function Footer() {
         {/* Kolom 2: Navigasi */}
         <div className="text-left">
           <h3 className="md:text-2xl text-xl font-semibold mb-4">Navigasi</h3>
-          <div className="grid grid-cols-2 gap-x-4 gap-y-3 text-gray-300 md:text-xl text-lg">
-            <Link href="/" className="hover:text-white transition">Beranda</Link>
-            <Link href="/struktur-organisasi" className="hover:text-white transition">Struktur Organisasi</Link>
-            <Link href="/proker" className="hover:text-white transition">Program Kerja</Link>
-            <Link href="/galeri" className="hover:text-white transition">Galeri</Link>
-            <Link href="/artikel" className="hover:text-white transition">Artikel Mahasiswa</Link>
-            <Link href="/diskusi" className="hover:text-white transition">Ruang Diskusi</Link>
-            <Link href="/kontak" className="hover:text-white transition">Kontak Kami</Link>
-            <Link href="/login" className="hover:text-white transition">Login</Link>
+          <div className="grid grid-cols-2 gap-x-4 text-gray-300 md:text-lg text-sm">
+            <Link href="/" className="hover:text-white transition hover:underline">Beranda</Link>
+            <Link href="/struktur" className="hover:text-white transition hover:underline">Struktur Organisasi</Link>
+            <Link href="/proker" className="hover:text-white transition hover:underline">Program Kerja</Link>
+            <Link href="/galeri" className="hover:text-white transition hover:underline">Galeri</Link>
+            <Link href="/artikel" className="hover:text-white transition hover:underline">Artikel Mahasiswa</Link>
+            <Link href="/diskusi" className="hover:text-white transition hover:underline">Ruang Diskusi</Link>
+            <Link href="/kontak" className="hover:text-white transition hover:underline">Kontak Kami</Link>
+            <Link href="/login" className="hover:text-white transition hover:underline">Login</Link>
           </div>
         </div>
 

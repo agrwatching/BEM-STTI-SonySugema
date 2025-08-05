@@ -4,10 +4,10 @@ export const metadata = {
   description: "Selamat datang di website resmi Senat Mahasiswa STTI Sony Sugema. Temukan informasi terbaru seputar kegiatan dan organisasi kami.",
 };
 
-import Hero from './beranda/Hero'
-import AboutSenat from './beranda/AboutSenat'
-import Speech from './beranda/Speech'
-import Komentar from './beranda/Komentar'
+import Hero from '@/components/beranda/Hero'
+import AboutSenat from '@/components/beranda/AboutSenat'
+import Speech from '@/components/beranda/Speech'
+import Komentar from '@/components/beranda/Komentar'
 
 export default function Home() {
   return (
