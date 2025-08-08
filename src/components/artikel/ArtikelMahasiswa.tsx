@@ -33,7 +33,7 @@ const dummyArtikel: Artikel[] = [
 
 export default function ArtikelMahasiswa() {
   return (
-    <section className="min-h-screen bg-black text-white py-16 px-4">
+    <section className="min-h-screen bg-[#0a0f1c] text-white py-16 px-4">
       <div className="max-w-6xl mx-auto">
         <h2 className="text-3xl md:text-5xl font-bold mb-12 text-center">
           Artikel Mahasiswa

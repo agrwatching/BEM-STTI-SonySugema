@@ -59,7 +59,7 @@ const programKerjaDivisi = [
 
 export default function ProgramKerja() {
   return (
-    <section className="bg-black min-h-screen text-white py-16 px-4">
+    <section className="bg-[#0a0f1c] min-h-screen text-white py-16 px-4">
       <div className="max-w-5xl mx-auto space-y-16">
         {/* Program Kerja Senat */}
         <div>

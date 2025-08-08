@@ -29,7 +29,7 @@ export default function Footer() {
         {/* Kolom 2: Navigasi */}
         <div className="text-left">
           <h3 className="md:text-2xl text-xl font-semibold mb-4">Navigasi</h3>
-          <div className="grid grid-cols-2 gap-x-4 text-gray-300 md:text-lg text-sm">
+          <div className="grid grid-cols-2 gap-x-4 text-gray-300 md:text-lg text-lg">
             <Link href="/" className="hover:text-white transition hover:underline">Beranda</Link>
             <Link href="/struktur" className="hover:text-white transition hover:underline">Struktur Organisasi</Link>
             <Link href="/proker" className="hover:text-white transition hover:underline">Program Kerja</Link>
@@ -37,7 +37,7 @@ export default function Footer() {
             <Link href="/artikel" className="hover:text-white transition hover:underline">Artikel Mahasiswa</Link>
             <Link href="/diskusi" className="hover:text-white transition hover:underline">Ruang Diskusi</Link>
             <Link href="/kontak" className="hover:text-white transition hover:underline">Kontak Kami</Link>
-            <Link href="/login" className="hover:text-white transition hover:underline">Login</Link>
+            <Link href="/dashboard/login" className="hover:text-white transition hover:underline">Login</Link>
           </div>
         </div>
 

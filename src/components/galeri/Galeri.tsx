@@ -39,7 +39,7 @@ export default function Galeri() {
   const [selected, setSelected] = useState<null | typeof dummyGaleri[0]>(null);
 
   return (
-    <section className="min-h-screen bg-black text-white py-16 px-4">
+    <section className="min-h-screen bg-[#0a0f1c] text-white py-16 px-4">
       <div className="max-w-7xl mx-auto">
         <h2 className="text-3xl md:text-5xl font-bold mb-12 text-center">
           Galeri Kegiatan
