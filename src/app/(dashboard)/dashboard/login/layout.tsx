@@ -20,7 +20,7 @@ export default function LoginLayout({
           strategy="beforeInteractive"
         />
       </head>
-      <body className="min-h-screen flex items-center justify-center bg-gray-50">
+      <body className="">
         {children}
       </body>
     </html>
