@@ -67,7 +67,7 @@ export default function LoginPage() {
     <>
           <button
         type="button"
-        onClick={() => router.back()}
+        onClick={() => router.push('/')}
         disabled={loading || showErrorModal}
         className="
           fixed top-4 left-4 z-50
