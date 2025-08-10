@@ -7,8 +7,7 @@ import ReCAPTCHA from 'react-google-recaptcha';
 export default function LoginPage() {
   const router = useRouter();
   const recaptchaRef = useRef<ReCAPTCHA>(null);
-
-  // Inisialisasi state dengan string kosong (default)
+  const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
@@ -66,39 +65,108 @@ export default function LoginPage() {
 
   return (
     <>
+          <button
+        type="button"
+        onClick={() => router.back()}
+        disabled={loading || showErrorModal}
+        className="
+          fixed top-4 left-4 z-50
+          bg-gray-700 hover:bg-gray-800
+          text-white px-4 py-2 rounded-md
+          shadow-md
+          transition-colors duration-200
+          focus:outline-none focus:ring-2 focus:ring-gray-500
+          disabled:opacity-50 disabled:cursor-not-allowed
+        "
+        aria-label="Kembali ke halaman sebelumnya"
+      >
+        ← Kembali
+      </button>
       <div className="min-h-screen flex items-center justify-center bg-gray-100">
         <form
           onSubmit={handleLogin}
-          className="bg-white p-6 rounded shadow-md w-full max-w-sm"
-          aria-disabled={loading}
+          className="bg-white shadow-md w-full max-w-sm border-t-4 border-blue-500 rounded-lg overflow-hidden"
         >
-          <h2 className="text-xl font-semibold mb-4">Halaman Login</h2>
+          {/* Header */}
+          <div className="flex items-center justify-center px-4 py-3">
+            <img
+              src="/logo_senat.png"
+              alt="Logo Senat Mahasiswa"
+              className="w-12 h-12 object-contain"
+            />
+            <div className="ml-3">
+              <h1 className="text-2xl text-gray-800">Senat Mahasiswa</h1>
+              <hr />
+              <p className="text-xs text-gray-600">Suara Mahasiswa, Pilar Perubahan</p>
+            </div>
+          </div>
+          <h2 className='text-center w-full pb-4 font-semibold text-gray-700 text-lg'>Kota Karawang</h2>
+          {/* Garis separator */}
+          <hr />
 
-          <input
-            suppressHydrationWarning
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="Email"
-            className="w-full mb-3 p-2 border border-gray-300 rounded"
-            required
-            disabled={loading || showErrorModal}
-            autoComplete="username"
-          />
+          {/* Tagline */}
+          <div className="px-4 py-4">
+            <h2 className="text-center text-sm text-gray-700 font-semibold">
+              Halaman Login
+            </h2>
+          </div>
 
-          <input
-            suppressHydrationWarning
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="Password"
-            className="w-full mb-3 p-2 border border-gray-300 rounded"
-            required
-            disabled={loading || showErrorModal}
-            autoComplete="current-password"
-          />
+          {/* Input Email */}
+{/* Input Email */}
+<div className='px-4 mb-6'>
+<div className="flex items-center mb-4 border border-gray-300 rounded overflow-hidden">
+  <input
+    suppressHydrationWarning
+    type="email"
+    value={email}
+    onChange={(e) => setEmail(e.target.value)}
+    placeholder="Email"
+    className="flex-1 py-2 px-3"
+    required
+    disabled={loading || showErrorModal}
+    autoComplete="username"
+  />
+  <div className="bg-gray-100 border-l border-gray-300 p-2">
+    <img src="/user.png" alt="User Icon" className="w-5 h-5" />
+  </div>
+</div>
+<div className="flex items-center mb-2 border border-gray-300 rounded overflow-hidden">
+  <input
+    suppressHydrationWarning
+    type={showPassword ? "text" : "password"}
+    value={password}
+    onChange={(e) => setPassword(e.target.value)}
+    placeholder="Password"
+    className="flex-1 py-2 px-3"
+    required
+    disabled={loading || showErrorModal}
+    autoComplete="current-password"
+  />
+  <div className="bg-gray-100 border-l border-gray-300 p-2">
+    <img src="/padlock.png" alt="Padlock Icon" className="w-5 h-5" />
+  </div>
+</div>
 
-          <div className="mb-3">
+</div>
+
+{/* Tampilkan kata sandi & Lupa password */}
+<div className="flex items-center justify-between px-5 mb-4 text-sm">
+  <label className="flex items-center gap-2">
+    <input
+      type="checkbox"
+      checked={showPassword}
+      onChange={() => setShowPassword(!showPassword)}
+    />
+    Tampilkan kata sandi
+  </label>
+  <a href="/forgot-password" className="text-blue-600 hover:underline">
+    Lupa Kata Sandi?
+  </a>
+</div>
+
+
+          {/* reCAPTCHA */}
+          <div className="px-4 mb-4 flex items-center justify-center">
             <ReCAPTCHA
               key={loading ? 'loading' : 'normal'}
               sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY ?? ''}
@@ -108,18 +176,22 @@ export default function LoginPage() {
             />
           </div>
 
-          <button
-            type="submit"
-            disabled={loading || showErrorModal || !mounted}
-            className={`w-full ${
-              loading ? 'bg-gray-400' : 'bg-blue-600 hover:bg-blue-700'
-            } text-white py-2 rounded`}
-          >
-            {mounted ? (loading ? 'Memproses...' : 'Login') : 'Loading...'}
-          </button>
+          {/* Tombol */}
+          <div className="px-4 pb-4">
+            <button
+              type="submit"
+              disabled={loading || showErrorModal || !mounted}
+              className={`w-full ${
+                loading ? 'bg-gray-400' : 'bg-blue-600 hover:bg-blue-700'
+              } text-white py-2 rounded`}
+            >
+              {mounted ? (loading ? 'Memproses...' : 'Masuk') : 'Loading...'}
+            </button>
+          </div>
         </form>
       </div>
 
+      {/* Modal Error */}
       {showErrorModal && (
         <div
           role="alertdialog"

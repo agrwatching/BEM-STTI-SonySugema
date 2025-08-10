@@ -4,6 +4,9 @@ import Script from "next/script";
 export const metadata = {
   title: "Login | Senat STTI Sony Sugema",
   description: "Halaman login untuk dashboard Senat STTI Sony Sugema",
+  icons: {
+    icon: "/logo_senat.ico",
+  },
 };
 
 export default function LoginLayout({
