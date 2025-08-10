@@ -10,36 +10,33 @@ export function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
 
   const navItems = [
-  { href: "/", label: "Beranda" },
-  { href: "/struktur", label: "Struktur Organisasi" },
-  { href: "/proker", label: "Program Kerja" },
-  { href: "/galeri", label: "Galeri" },
-  { href: "/artikel", label: "Artikel Mahasiswa" },
-  { href: "/diskusi", label: "Ruang Diskusi" },
-  { href: "/kontak", label: "Kontak Kami" },
-]
-
+    { href: "/", label: "Beranda" },
+    { href: "/struktur", label: "Struktur Organisasi" },
+    { href: "/proker", label: "Program Kerja" },
+    { href: "/galeri", label: "Galeri" },
+    { href: "/artikel", label: "Artikel Mahasiswa" },
+    { href: "/diskusi", label: "Ruang Diskusi" },
+    { href: "/kontak", label: "Kontak Kami" },
+  ]
 
   return (
     <nav className="bg-[#001f3f] sticky top-0 z-[999] w-full font-sans">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-20 md:py-4 py-1 flex items-center justify-between">
-        {/* Logo kiri */}
-        <Link href="/">
-          <div className="flex items-center space-x-3 p-2 rounded-md transition-transform duration-300 transform hover:scale-105 neon-hover cursor-pointer">
-            <Image
-              src="/logo_senat.png"
-              alt="Logo Senat"
-              width={45}
-              height={45}
-              priority
-            />
-            <div className="leading-tight">
-              <span className="text-xl sm:text-2xl font-semibold text-white">
-                Senat Mahasiswa
-              </span>
-              <div className="text-sm text-gray-200 -mt-1">
-                STTI Sony Sugema
-              </div>
+      <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 py-2 md:py-3 flex items-center justify-between">
+        {/* Logo */}
+        <Link href="/" className="flex items-center space-x-3 p-2 rounded-md transition-transform duration-300 transform hover:scale-105 neon-hover cursor-pointer">
+          <Image
+            src="/logo_senat.png"
+            alt="Logo Senat"
+            width={42}
+            height={42}
+            priority
+          />
+          <div className="leading-tight">
+            <span className="text-lg sm:text-xl md:text-2xl font-semibold text-white">
+              Senat Mahasiswa
+            </span>
+            <div className="text-xs sm:text-sm text-gray-200 -mt-1">
+              STTI Sony Sugema
             </div>
           </div>
         </Link>
@@ -50,17 +47,17 @@ export function Navbar() {
             onClick={() => setIsOpen(true)}
             className="p-2 bg-white/20 rounded-md text-white hover:bg-white/30 transition"
           >
-            <Menu size={26} />
+            <Menu size={24} />
           </button>
         </div>
 
-        {/* Menu kanan desktop */}
-        <div className="hidden md:flex flex-wrap justify-end gap-x-2 gap-y-2 max-w-full py-4 px-4 lg:flex-nowrap">
+        {/* Menu desktop */}
+        <div className="hidden md:flex flex-wrap justify-end gap-x-1 lg:gap-x-2 gap-y-2 max-w-full px-2">
           {navItems.map((item, i) => (
             <Link
               key={i}
               href={item.href}
-              className="text-white text-sm sm:text-base px-3 py-2 min-w-fit rounded transition hover:border-[#d946ef] hover:bg-indigo-900 hover:scale-105 hover:-rotate-2 hover:shadow-[0_4px_12px_0_#d946ef]"
+              className="text-white text-sm lg:text-base px-2 lg:px-3 py-1.5 min-w-fit rounded transition hover:border-[#d946ef] hover:bg-indigo-900 hover:scale-105 hover:-rotate-2 hover:shadow-[0_4px_12px_0_#d946ef]"
             >
               {item.label}
             </Link>
@@ -78,10 +75,9 @@ export function Navbar() {
           onClick={() => setIsOpen(false)}
           className="absolute top-6 right-6 p-2 bg-white/20 rounded-full text-white hover:bg-white/30 transition"
         >
-          <X size={30} />
+          <X size={28} />
         </button>
 
-        {/* Mobile menu tanpa hover/animasi */}
         <div className="flex flex-col gap-4 w-full items-center">
           {navItems.map((item, i) => (
             <Link

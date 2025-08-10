@@ -9,7 +9,7 @@ import { FaWhatsapp, FaTiktok } from "react-icons/fa6"
 export default function Footer() {
   return (
     <footer className="bg-[#0e1a2b] text-white">
-      <div className="px-6 py-12 grid grid-cols-1 md:grid-cols-3 gap-10 text-left md:pl-60">
+      <div className="px-6 py-12 grid grid-cols-1 md:grid-cols-3 gap-10 text-left md:pl-20 lg:pl-40">
 
         {/* Kolom 1: Tentang */}
         <div>

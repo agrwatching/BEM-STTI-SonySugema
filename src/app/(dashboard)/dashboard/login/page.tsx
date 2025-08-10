@@ -80,7 +80,7 @@ export default function LoginPage() {
         "
         aria-label="Kembali ke halaman sebelumnya"
       >
-        ← Kembali
+        Kembali
       </button>
       <div className="min-h-screen flex items-center justify-center bg-gray-100">
         <form
@@ -96,7 +96,7 @@ export default function LoginPage() {
             />
             <div className="ml-3">
               <h1 className="text-2xl text-gray-800">Senat Mahasiswa</h1>
-              <hr />
+              <hr className="border-t-1 border-indigo-500" />
               <p className="text-xs text-gray-600">Suara Mahasiswa, Pilar Perubahan</p>
             </div>
           </div>
