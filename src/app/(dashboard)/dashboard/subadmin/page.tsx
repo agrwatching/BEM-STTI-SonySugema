@@ -1,10 +1,10 @@
-// src/app/(dashboard)/dashboard/subadmin/page.tsx
 'use client';
 
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import AdminSidebar from './Sidebar';
 
-export default function SubadminDashboard() {
+export default function AdminDashboard() {
   const router = useRouter();
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState<{ email: string; role: string } | null>(null);
@@ -36,16 +36,12 @@ export default function SubadminDashboard() {
   if (loading) return <p className="p-8">Loading...</p>;
 
   return (
-    <div className="p-8">
-      <h1 className="text-2xl font-bold mb-4">
-        Welcome, {user?.email} 🙌
-      </h1>
-      <button
-        onClick={handleLogout}
-        className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition"
-      >
-        Logout
-      </button>
+    <div className="flex min-h-screen">
+      <AdminSidebar onLogout={handleLogout} />
+      <main className="flex-1 p-8">
+        <h1 className="text-2xl font-bold mb-4">Welcome, {user?.email} 🚫🚫</h1>
+        {/* Konten dashboard admin */}
+      </main>
     </div>
   );
 }
