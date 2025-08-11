@@ -2,7 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import AdminSidebar from "./Sidebar";
+import SubadminSidebar from "./SubadminSidebar";
+import SubadminNavbarMobile from "./SubadminNavbarMobile";
 
 export default function SubAdminLayoutClient({
   children,
@@ -40,9 +41,19 @@ export default function SubAdminLayoutClient({
   if (loading) return <p className="p-8">Loading...</p>;
 
   return (
-    <div className="flex min-h-screen">
-      <AdminSidebar onLogout={handleLogout} />
-      <main className="flex-1 p-6 bg-gray-50">{children}</main>
+    <div>
+      {/* Sidebar desktop */}
+      <div className="hidden md:block fixed top-0 left-0 h-screen z-50">
+        <SubadminSidebar onLogout={handleLogout} />
+      </div>
+
+      {/* Navbar mobile */}
+      <div className="block md:hidden">
+        <SubadminNavbarMobile onLogout={handleLogout} />
+      </div>
+
+      {/* Main content */}
+      <main className="pt-16 md:ml-64 p-6 bg-gray-50 min-h-screen">{children}</main>
     </div>
   );
 }

@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import React from 'react';
+import Link from "next/link";
 
 interface SidebarProps {
   onLogout: () => void;
@@ -8,9 +8,9 @@ interface SidebarProps {
 
 export default function SubadminSidebar({ onLogout }: SidebarProps) {
   const menus = [
-    { label: 'Dashboard Subadmin', href: '/dashboard/subadmin' },
-    { label: 'Management Proker', href: '/dashboard/subadmin/proker' },
-    { label: 'Settings', href: '/dashboard/subadmin/settings' },
+    { label: "Dashboard Subadmin", href: "/dashboard/subadmin" },
+    { label: "Management Proker", href: "/dashboard/subadmin/proker" },
+    { label: "Settings", href: "/dashboard/subadmin/settings" },
   ];
 
   return (
@@ -21,13 +21,13 @@ export default function SubadminSidebar({ onLogout }: SidebarProps) {
         </h2>
         <nav className="flex flex-col p-4 space-y-2">
           {menus.map((menu) => (
-            <a
+            <Link
               key={menu.label}
               href={menu.href}
-              className="hover:bg-gray-700 rounded px-3 py-2 transition"
+              className="hover:bg-gray-700 rounded px-3 py-2 transition block"
             >
               {menu.label}
-            </a>
+            </Link>
           ))}
         </nav>
       </div>
