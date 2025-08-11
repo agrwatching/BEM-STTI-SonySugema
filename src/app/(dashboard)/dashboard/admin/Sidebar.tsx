@@ -1,7 +1,6 @@
-// src/app/(dashboard)/dashboard/admin/Sidebar.tsx
-'use client';
+"use client";
 
-import React from 'react';
+import Link from "next/link";
 
 interface SidebarProps {
   onLogout: () => void;
@@ -9,10 +8,14 @@ interface SidebarProps {
 
 export default function AdminSidebar({ onLogout }: SidebarProps) {
   const menus = [
-    { label: 'Dashboard Admin', href: '/dashboard/admin' },
-    { label: 'Settings Admin', href: '/dashboard/admin/settings' },
-    { label: 'User Management', href: '/dashboard/admin/users' },
-    { label: 'Reports', href: '/dashboard/admin/reports' },
+    { label: "Dashboard Admin", href: "/dashboard/admin" },
+    { label: "Management User", href: "/dashboard/admin/users" },
+    { label: "Management Beranda", href: "/dashboard/admin/beranda" },
+    { label: "Management Struktur", href: "/dashboard/admin/struktur" },
+    { label: "Management Proker", href: "/dashboard/admin/proker" },
+    { label: "Management Galeri", href: "/dashboard/admin/galeri" },
+    { label: "Management Artikel", href: "/dashboard/admin/artikel" },
+    { label: "Settings", href: "/dashboard/admin/settings" },
   ];
 
   return (
@@ -23,13 +26,13 @@ export default function AdminSidebar({ onLogout }: SidebarProps) {
         </h2>
         <nav className="flex flex-col p-4 space-y-2">
           {menus.map((menu) => (
-            <a
+            <Link
               key={menu.label}
               href={menu.href}
-              className="hover:bg-gray-700 rounded px-3 py-2 transition"
+              className="hover:bg-gray-700 rounded px-3 py-2 transition block"
             >
               {menu.label}
-            </a>
+            </Link>
           ))}
         </nav>
       </div>

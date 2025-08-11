@@ -8,10 +8,9 @@ interface SidebarProps {
 
 export default function SubadminSidebar({ onLogout }: SidebarProps) {
   const menus = [
-    { label: 'Dashboard Subadmin', href: '#' },
-    { label: 'Settings Subadmin', href: '#' },
-    { label: 'Tasks', href: '#' },
-    { label: 'Profile', href: '#' },
+    { label: 'Dashboard Subadmin', href: '/dashboard/subadmin' },
+    { label: 'Management Proker', href: '/dashboard/subadmin/proker' },
+    { label: 'Settings', href: '/dashboard/subadmin/settings' },
   ];
 
   return (
