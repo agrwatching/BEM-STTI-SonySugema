@@ -1,3 +1,4 @@
+// src/app/(dashboard)/dashboard/admin/Sidebar.tsx
 'use client';
 
 import React from 'react';
@@ -8,10 +9,10 @@ interface SidebarProps {
 
 export default function AdminSidebar({ onLogout }: SidebarProps) {
   const menus = [
-    { label: 'Dashboard Admin', href: '#' },
-    { label: 'Settings Admin', href: '#' },
-    { label: 'User Management', href: '#' },
-    { label: 'Reports', href: '#' },
+    { label: 'Dashboard Admin', href: '/dashboard/admin' },
+    { label: 'Settings Admin', href: '/dashboard/admin/settings' },
+    { label: 'User Management', href: '/dashboard/admin/users' },
+    { label: 'Reports', href: '/dashboard/admin/reports' },
   ];
 
   return (

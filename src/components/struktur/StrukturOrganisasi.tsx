@@ -117,7 +117,7 @@ useEffect(() => {
       <div id="particles-org" className="absolute inset-0 z-0" />
 
       <div className="relative z-10 max-w-6xl mx-auto text-center">
-        <h2 className="text-3xl md:text-4xl font-bold mb-10 drop-shadow">
+        <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold mb-10 drop-shadow">
           Struktur Organisasi Senat Mahasiswa
         </h2>
 

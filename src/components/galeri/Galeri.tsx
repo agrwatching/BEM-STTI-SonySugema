@@ -41,7 +41,7 @@ export default function Galeri() {
   return (
     <section className="min-h-screen bg-[#0a0f1c] text-white py-16 px-4">
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-3xl md:text-5xl font-bold mb-12 text-center">
+        <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold mb-12 text-center">
           Galeri Kegiatan
         </h2>
 

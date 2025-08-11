@@ -85,7 +85,7 @@ export default function Footer() {
       </div>
 
       {/* Copyright */}
-      <div className="border-t border-gray-700 py-5 px-3 text-center text-gray-400 text-sm md:text-lg">
+      <div className="border-t border-gray-700 py-5 px-3 text-center text-gray-400 text-sm">
         &copy; {new Date().getFullYear()} Senat Mahasiswa STTI Sony Sugema.
       </div>
     </footer>

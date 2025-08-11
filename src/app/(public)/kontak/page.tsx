@@ -7,7 +7,7 @@ export default function KontakPage() {
   return (
     <div className="min-h-screen bg-[#0a0f1c] text-white py-16 px-6 md:px-20">
       <div className="max-w-5xl mx-auto">
-        <h1 className="text-3xl md:text-5xl font-bold text-center mb-10">
+        <h1 className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold text-center mb-10">
           Kontak Kami
         </h1>
 

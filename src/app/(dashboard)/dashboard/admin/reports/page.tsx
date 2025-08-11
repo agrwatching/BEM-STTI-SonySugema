@@ -1,11 +1,10 @@
-// // src/app/(dashboard)/dashboard/admin/page.tsx
 'use client';
 
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import AdminSidebar from './Sidebar';
+import AdminSidebar from '../Sidebar';
 
-export default function AdminDashboard() {
+export default function ReportsPage() {
   const router = useRouter();
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState<{ email: string; role: string } | null>(null);
@@ -40,8 +39,8 @@ export default function AdminDashboard() {
     <div className="flex min-h-screen">
       <AdminSidebar onLogout={handleLogout} />
       <main className="flex-1 p-8">
-        <h1 className="text-2xl font-bold mb-4">Welcome, {user?.email} 👑</h1>
-        {/* Konten dashboard admin */}
+        <h1 className="text-2xl font-bold mb-4">Reports 📊</h1>
+        <p>Halaman untuk menampilkan laporan dan statistik.</p>
       </main>
     </div>
   );

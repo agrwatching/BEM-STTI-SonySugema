@@ -63,7 +63,7 @@ export default function ProgramKerja() {
       <div className="max-w-5xl mx-auto space-y-16">
         {/* Program Kerja Senat */}
         <div>
-          <h2 className="text-2xl md:text-4xl font-bold mb-12 text-center">
+          <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold mb-12 text-center">
             Program Kerja Senat Mahasiswa
           </h2>
           <div className="grid gap-8">

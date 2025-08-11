@@ -47,7 +47,7 @@ function AnimatedBox({
 export default function AboutSenat() {
   return (
     <section
-      className="bg-white py-20 md:pt-40 pt-20 pt-0 px-6 sm:px-10 md:px-16 lg:px-24 xl:px-32 overflow-x-hidden"
+      className="bg-white py-20 md:pt-40 pt-20 px-6 sm:px-10 md:px-16 lg:px-24 xl:px-32 overflow-x-hidden"
       id="about"
     >
       <div className="max-w-8xl mx-auto">
@@ -79,24 +79,29 @@ export default function AboutSenat() {
           <div className="flex flex-col md:flex-row gap-6 items-stretch">
             {/* Visi */}
             <AnimatedBox direction="left">
-              <div className="flex-1 bg-white rounded-lg p-6 shadow-sm border-2 border-black flex flex-col h-full">
-                <h3 className="text-2xl font-bold text-blue-900 mb-4 text-center">
-                  Visi
-                </h3>
-                <p className="text-gray-700 text-lg text-justify flex-1">
-                  Menjadikan Senat Mahasiswa sebagai motor penggerak perubahan
-                  yang berlandaskan integritas, solidaritas, dan profesionalitas.
+              <div className="flex-1 bg-white rounded-lg shadow-sm border-2 border-black flex flex-col h-full">
+                <div className="bg-blue-900 rounded-t-sm border-b-2 border-black">
+                    <h3 className="text-2xl font-bold text-white my-4 text-center ">
+                    Visi
+                    </h3>
+                </div>
+                <p className="text-gray-700 text-lg text-justify flex-1 p-6">
+                  Menjadikan Senat STTI Sony Sugema sebagai motor penggerak inovasi, 
+                  kolaborasi, kreativitas mahasiswa untuk menciptakan lingkungan kampus yang unggul, 
+                  berdaya saing, dan di kenal luas sebagai kampus teknologi.
                 </p>
               </div>
             </AnimatedBox>
 
             {/* Misi */}
             <AnimatedBox direction="right">
-              <div className="flex-1 bg-white rounded-lg p-6 shadow-sm border-2 border-black flex flex-col h-full">
-                <h3 className="text-2xl font-bold text-blue-900 mb-4 text-center">
-                  Misi
-                </h3>
-                <ul className="list-disc list-inside text-gray-700 space-y-3 text-lg flex-1">
+              <div className="flex-1 bg-white rounded-lg shadow-sm border-2 border-black flex flex-col h-full">
+                <div className="bg-blue-900 rounded-t-sm border-b-2 border-black">
+                    <h3 className="text-2xl font-bold text-white my-4 text-center">
+                    Misi
+                    </h3>
+                </div>
+                <ul className="list-disc list-inside text-gray-700 space-y-3 text-lg flex-1 p-6">
                   <li>
                     Mengembangkan potensi kepemimpinan mahasiswa melalui
                     berbagai program kerja yang inovatif.
