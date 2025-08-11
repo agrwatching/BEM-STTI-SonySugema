@@ -101,24 +101,24 @@ export default function AboutSenat() {
                     Misi
                     </h3>
                 </div>
-                <ul className="list-disc list-inside text-gray-700 space-y-3 text-lg flex-1 p-6">
-                  <li>
-                    Mengembangkan potensi kepemimpinan mahasiswa melalui
-                    berbagai program kerja yang inovatif.
-                  </li>
-                  <li>
-                    Menampung dan menyalurkan aspirasi mahasiswa secara
-                    transparan dan bertanggung jawab.
-                  </li>
-                  <li>
-                    Membangun sinergi antar organisasi kemahasiswaan dan pihak
-                    kampus.
-                  </li>
-                  <li>
-                    Mendorong terciptanya lingkungan kampus yang aktif, kritis,
-                    dan solutif.
-                  </li>
-                </ul>
+                  <ul className="space-y-3 text-gray-700 text-lg flex-1 p-6">
+                    <li className="flex items-start gap-3">
+                      <span className="text-green-600 text-xl">✅</span>
+                      <span>Mengembangkan potensi kepemimpinan mahasiswa melalui berbagai program kerja yang inovatif.</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="text-green-600 text-xl">✅</span>
+                      <span>Menampung dan menyalurkan aspirasi mahasiswa secara transparan dan bertanggung jawab.</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="text-green-600 text-xl">✅</span>
+                      <span>Membangun sinergi antar organisasi kemahasiswaan dan pihak kampus.</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="text-green-600 text-xl">✅</span>
+                      <span>Mendorong terciptanya lingkungan kampus yang aktif, kritis, dan solutif.</span>
+                    </li>
+                  </ul>
               </div>
             </AnimatedBox>
           </div>
