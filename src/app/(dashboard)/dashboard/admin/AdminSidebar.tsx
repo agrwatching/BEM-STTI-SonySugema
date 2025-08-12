@@ -35,7 +35,12 @@ export default function AdminSidebar({ onLogout }: SidebarProps) {
         <h2 className="text-2xl font-bold p-4 border-b border-gray-700">
           ADMIN MENU
         </h2>
-        <nav className="flex flex-col p-4 space-y-2">
+
+        {/* Scrollable Menu Area */}
+        <nav
+          className="flex flex-col p-4 space-y-2 overflow-y-auto"
+          style={{ maxHeight: 'calc(100vh - 8rem)' }} // 64px header + 64px footer = 128px = 8rem
+        >
           {/* Dashboard Admin */}
           <Link
             key="Dashboard Admin"
@@ -96,6 +101,8 @@ export default function AdminSidebar({ onLogout }: SidebarProps) {
             ))}
         </nav>
       </div>
+
+      {/* Footer Logout */}
       <div className="p-4 border-t border-gray-700">
         <button
           onClick={onLogout}
