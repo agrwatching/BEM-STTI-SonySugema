@@ -17,7 +17,7 @@ export async function middleware(req: NextRequest) {
   if (
     pathname.startsWith("/dashboard/login") || // halaman login
     pathname.startsWith("/unauthorized") ||    // halaman unauthorized
-    pathname.startsWith("/api/login")           // API login
+    pathname.startsWith("/api/login")          // API login
   ) {
     return NextResponse.next();
   }

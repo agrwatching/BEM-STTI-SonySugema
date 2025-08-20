@@ -5,6 +5,8 @@ import { useRouter } from "next/navigation";
 import AdminSidebar from "./AdminSidebar";
 import AdminNavbarMobile from "./AdminNavbarMobile";
 
+type User = { email: string; role: string };
+
 export default function AdminLayoutClient({
   children,
 }: {
@@ -12,33 +14,48 @@ export default function AdminLayoutClient({
 }) {
   const router = useRouter();
   const [loading, setLoading] = useState(true);
-  const [user, setUser] = useState<{ email: string; role: string } | null>(null);
+  const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
     const checkAuth = async () => {
       try {
         const res = await fetch("/api/auth/me", { credentials: "include" });
-        if (!res.ok) return router.push("/dashboard/login");
+        if (!res.ok) {
+          router.replace("/dashboard/login");
+          return;
+        }
 
-        const data = await res.json();
-        if (data.role !== "admin") return router.push("/dashboard/login");
+        const data: User = await res.json();
+        if (data.role !== "admin") {
+          router.replace("/dashboard/login");
+          return;
+        }
 
         setUser(data);
       } catch {
-        router.push("/dashboard/login");
+        router.replace("/dashboard/login");
       } finally {
         setLoading(false);
       }
     };
+
     checkAuth();
   }, [router]);
 
   const handleLogout = async () => {
     await fetch("/api/logout", { method: "POST", credentials: "include" });
-    router.push("/dashboard/login");
+    router.replace("/dashboard/login");
   };
 
-  if (loading) return <p className="p-8">Loading...</p>;
+  // 🔹 Jangan render layout sebelum auth selesai
+  if (loading) {
+    return <p className="p-8">Loading...</p>;
+  }
+
+  // 🔹 Kalau gagal login / user null → jangan render apapun
+  if (!user) {
+    return null;
+  }
 
   return (
     <div>
@@ -53,7 +70,9 @@ export default function AdminLayoutClient({
       </div>
 
       {/* Konten utama */}
-      <main className="pt-16 md:ml-64 p-6 bg-gray-50 min-h-screen">{children}</main>
+      <main className="pt-16 md:ml-64 p-6 bg-gray-50 min-h-screen">
+        {children}
+      </main>
     </div>
   );
 }
