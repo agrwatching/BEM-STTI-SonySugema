@@ -3,6 +3,13 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import jwt from "jsonwebtoken";
 
+interface DecodedToken {
+  userId: string;
+  role: "admin" | "subadmin";
+  iat: number;
+  exp: number;
+}
+
 export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
@@ -18,12 +25,10 @@ export async function middleware(req: NextRequest) {
   // Ambil token dari cookie
   const token = req.cookies.get("token")?.value;
 
-  // Kalau token tidak ada → redirect ke login
   if (!token) {
     return NextResponse.redirect(new URL("/dashboard/login", req.url));
   }
 
-  // Pastikan JWT_SECRET ada
   const jwtSecret = process.env.JWT_SECRET;
   if (!jwtSecret) {
     console.error("JWT_SECRET environment variable is not set");
@@ -31,10 +36,9 @@ export async function middleware(req: NextRequest) {
   }
 
   try {
-    // Verifikasi token dan decode payload
-    const decoded = jwt.verify(token, jwtSecret) as { role?: string };
+    const decoded = jwt.verify(token, jwtSecret) as DecodedToken;
 
-    // Role check
+    // Role-based access control
     if (pathname.startsWith("/dashboard/admin") && decoded.role !== "admin") {
       return NextResponse.redirect(new URL("/unauthorized", req.url));
     }
@@ -43,17 +47,19 @@ export async function middleware(req: NextRequest) {
       return NextResponse.redirect(new URL("/unauthorized", req.url));
     }
 
-    // Token valid, lanjutkan akses
+    // Token valid → lanjutkan akses
     return NextResponse.next();
   } catch (err) {
-    // Token tidak valid atau error → redirect ke login
     console.warn("Invalid or expired token:", err);
-    return NextResponse.redirect(new URL("/dashboard/login", req.url));
+    const res = NextResponse.redirect(new URL("/dashboard/login", req.url));
+    res.cookies.set("token", "", { maxAge: 0 }); // hapus token invalid
+    return res;
   }
 }
 
 export const config = {
   matcher: [
-    "/dashboard/:path*", // proteksi semua route dashboard
+    "/dashboard/:path*",
+    // "/api/:path*", // aktifkan kalau mau proteksi API juga
   ],
 };

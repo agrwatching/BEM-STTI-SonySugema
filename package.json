@@ -11,11 +11,13 @@
   "dependencies": {
     "bcryptjs": "^3.0.2",
     "chart.js": "^4.5.0",
+    "cloudinary": "^2.7.0",
     "dotenv": "^17.2.1",
     "framer-motion": "^12.23.9",
     "jsonwebtoken": "^9.0.2",
     "lucide-react": "^0.525.0",
     "mongoose": "^8.17.0",
+    "multer": "^2.0.2",
     "next": "15.4.4",
     "next-auth": "^4.24.11",
     "particles.js": "^2.0.0",

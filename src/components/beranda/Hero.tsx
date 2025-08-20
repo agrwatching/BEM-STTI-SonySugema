@@ -3,26 +3,53 @@
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
 
-const images = ['/slide1.jpg', '/slide2.jpg', '/slide3.jpg']
+interface HeroImage {
+  _id: string
+  url: string
+}
 
 export default function Hero() {
+  const [images, setImages] = useState<HeroImage[]>([])
   const [currentIndex, setCurrentIndex] = useState(0)
 
+  // Ambil gambar dari API
   useEffect(() => {
+    const fetchImages = async () => {
+      try {
+        const res = await fetch('/api/hero')
+        const data = await res.json()
+        setImages(data)
+      } catch (err) {
+        console.error(err)
+      }
+    }
+    fetchImages()
+  }, [])
+
+  // Auto ganti slide setiap 5 detik
+  useEffect(() => {
+    if (images.length === 0) return
     const interval = setInterval(() => {
       setCurrentIndex(prev => (prev + 1) % images.length)
-    }, 5000) // Ganti gambar setiap 5 detik
-
+    }, 5000)
     return () => clearInterval(interval)
-  }, [])
+  }, [images])
+
+  if (images.length === 0) {
+    return (
+      <section className="relative w-full aspect-[16/9] bg-gray-800 flex items-center justify-center text-white">
+        <p>Loading hero images...</p>
+      </section>
+    )
+  }
 
   return (
     <section className="relative w-full aspect-[16/9] overflow-hidden z-10">
       {/* Background Images */}
-      {images.map((src, index) => (
+      {images.map((img, index) => (
         <Image
-          key={index}
-          src={src}
+          key={img._id}
+          src={img.url}
           alt={`Slide ${index + 1}`}
           fill
           className={`absolute object-cover transition-opacity duration-1000 ease-in-out ${
@@ -39,8 +66,8 @@ export default function Hero() {
           </p>
           <h1 className="text-white text-3xl md:text-7xl font-extrabold">
             KABINET <span className="bg-gradient-to-r from-green-400 via-cyan-400 to-blue-500 text-transparent bg-clip-text drop-shadow-md">
-                      TUNAS LANGIT
-                    </span>
+              TUNAS LANGIT
+            </span>
           </h1>
           <p className="text-gray-200 md:mt-6 mt-0 text-sm md:text-lg px-4 md:px-0">
             Bergerak Bersama, Mewujudkan Dampak Nyata untuk Mahasiswa & Kampus
@@ -50,8 +77,6 @@ export default function Hero() {
               Jelajahi Lebih Lanjut
             </button>
           </a>
-
-
         </div>
       </div>
     </section>
