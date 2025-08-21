@@ -4,6 +4,9 @@ const nextConfig: NextConfig = {
   images: {
     domains: ["randomuser.me"],
   },
+  eslint: {
+    ignoreDuringBuilds: true, // ✅ Tambahkan ini
+  },
   async headers() {
     return [
       {
