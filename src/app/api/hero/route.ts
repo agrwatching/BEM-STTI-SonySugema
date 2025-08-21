@@ -4,7 +4,7 @@ import clientPromise from "@/lib/mongodb";
 export async function GET() {
   try {
     const client = await clientPromise;
-    const db = client.db("your_db_name"); // ganti sesuai DB kamu
+    const db = client.db("your_db_name"); // Ganti sesuai DB kamu
 
     const heroes = await db
       .collection("heroes")
@@ -13,7 +13,9 @@ export async function GET() {
       .toArray();
 
     return NextResponse.json(heroes);
-  } catch (err: any) {
-    return NextResponse.json({ error: err.message }, { status: 500 });
+  } catch (err: unknown) {
+    const errorMessage =
+      err instanceof Error ? err.message : "Internal Server Error";
+    return NextResponse.json({ error: errorMessage }, { status: 500 });
   }
 }

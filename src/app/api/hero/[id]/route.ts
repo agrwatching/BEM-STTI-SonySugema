@@ -9,11 +9,11 @@ export async function DELETE(
 ) {
   try {
     const client = await clientPromise;
-    const db = client.db("your_db_name"); // ganti sesuai DB kamu
+    const db = client.db("your_db_name"); // Ganti sesuai DB kamu
 
     const hero = await db
       .collection("heroes")
-      .findOne({ _id: new ObjectId(params.id) });
+      .findOne<{ public_id: string }>({ _id: new ObjectId(params.id) });
 
     if (!hero) {
       return NextResponse.json({ error: "Hero not found" }, { status: 404 });
@@ -26,7 +26,9 @@ export async function DELETE(
     await db.collection("heroes").deleteOne({ _id: new ObjectId(params.id) });
 
     return NextResponse.json({ success: true });
-  } catch (err: any) {
-    return NextResponse.json({ error: err.message }, { status: 500 });
+  } catch (err: unknown) {
+    const errorMessage =
+      err instanceof Error ? err.message : "Internal Server Error";
+    return NextResponse.json({ error: errorMessage }, { status: 500 });
   }
 }
