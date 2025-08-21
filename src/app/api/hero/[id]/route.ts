@@ -5,19 +5,32 @@ import cloudinary from "@/lib/cloudinary";
 
 export const runtime = "nodejs";
 
-export async function DELETE(req: Request, { params }: { params: { id: string } }) {
+export async function DELETE(
+  req: Request,
+  { params }: { params: { id: string } }
+) {
   try {
-    const client = await clientPromise;
-    const db = client.db("your_db_name");
+    const { id } = params;
+    if (!id) return NextResponse.json({ error: "Missing id" }, { status: 400 });
 
-    const hero = await db.collection("heroes").findOne({ _id: new ObjectId(params.id) });
+    const client = await clientPromise;
+    const db = client.db("your_db_name"); // ganti sesuai DB-mu
+
+    let objectId: ObjectId;
+    try {
+      objectId = new ObjectId(id);
+    } catch {
+      return NextResponse.json({ error: "Invalid id format" }, { status: 400 });
+    }
+
+    const hero = await db.collection("heroes").findOne({ _id: objectId });
     if (!hero) return NextResponse.json({ error: "Hero not found" }, { status: 404 });
 
     // Hapus dari Cloudinary
     if (hero.public_id) await cloudinary.uploader.destroy(hero.public_id);
 
     // Hapus dari MongoDB
-    await db.collection("heroes").deleteOne({ _id: new ObjectId(params.id) });
+    await db.collection("heroes").deleteOne({ _id: objectId });
 
     return NextResponse.json({ success: true });
   } catch (err: unknown) {
