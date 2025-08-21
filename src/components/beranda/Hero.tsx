@@ -11,16 +11,22 @@ interface HeroImage {
 export default function Hero() {
   const [images, setImages] = useState<HeroImage[]>([])
   const [currentIndex, setCurrentIndex] = useState(0)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
 
   // Ambil gambar dari API
   useEffect(() => {
     const fetchImages = async () => {
       try {
         const res = await fetch('/api/hero')
+        if (!res.ok) throw new Error('Gagal memuat data hero.')
         const data = await res.json()
         setImages(data)
       } catch (err) {
         console.error(err)
+        setError('Gagal memuat gambar hero. Silakan coba lagi nanti.')
+      } finally {
+        setLoading(false)
       }
     }
     fetchImages()
@@ -35,10 +41,35 @@ export default function Hero() {
     return () => clearInterval(interval)
   }, [images])
 
-  if (images.length === 0) {
+  // Loading state
+  if (loading) {
     return (
       <section className="relative w-full aspect-[16/9] bg-gray-800 flex items-center justify-center text-white">
-        <p>Loading hero images...</p>
+        <p>Memuat hero section...</p>
+      </section>
+    )
+  }
+
+  // Jika ada error
+  if (error) {
+    return (
+      <section className="relative w-full aspect-[16/9] bg-gray-900 flex items-center justify-center text-center text-white px-4">
+        <div>
+          <Image src="/what.png" alt="Error" width={120} height={120} className="mx-auto mb-4" />
+          <p className="text-lg font-semibold mb-2">{error}</p>
+          <p className="text-sm text-gray-300">Pastikan koneksi internet stabil atau hubungi admin.</p>
+        </div>
+      </section>
+    )
+  }
+
+  // Jika tidak ada gambar
+  if (images.length === 0) {
+    return (
+      <section className="relative w-full aspect-[16/9] bg-gray-800 flex flex-col items-center justify-center text-white px-4">
+        <Image src="/what.png" alt="Kosong" width={100} height={100} className="mb-4" />
+        <p className="text-lg font-semibold mb-2">Belum ada hero section</p>
+        <p className="text-sm text-gray-300">Silakan tambahkan gambar melalui halaman admin.</p>
       </section>
     )
   }
