@@ -1,16 +1,14 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import clientPromise from "@/lib/mongodb";
 import { ObjectId } from "mongodb";
 import cloudinary from "@/lib/cloudinary";
 
 export const runtime = "nodejs";
 
-export async function DELETE(
-  req: Request,
-  { params }: { params: { id: string } }
-) {
+export async function DELETE(req: NextRequest) {
   try {
-    const { id } = params;
+    const url = new URL(req.url);
+    const id = url.pathname.split("/").pop(); // ambil id dari URL
     if (!id) return NextResponse.json({ error: "Missing id" }, { status: 400 });
 
     const client = await clientPromise;
