@@ -1,3 +1,4 @@
+// src/app/(dashboard)/dashboard/admin/beranda/hero/page.tsx
 "use client";
 
 import { useState, useEffect } from "react";
@@ -15,14 +16,25 @@ interface HeroImage {
 
 export default function HeroManagement() {
   const [images, setImages] = useState<HeroImage[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const [showUpload, setShowUpload] = useState(false);
   const [deleteTarget, setDeleteTarget] = useState<HeroImage | null>(null);
   const [showEmptyDelete, setShowEmptyDelete] = useState(false);
 
   const fetchImages = async () => {
-    const res = await fetch("/api/hero");
-    const data = await res.json();
-    setImages(data);
+    try {
+      setLoading(true);
+      setError(null);
+      const res = await fetch("/api/hero");
+      if (!res.ok) throw new Error("Gagal memuat data");
+      const data = await res.json();
+      setImages(data);
+    } catch (err: any) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -33,10 +45,16 @@ export default function HeroManagement() {
     <div className="p-6">
       <h1 className="text-xl font-semibold mb-6">Management Hero</h1>
 
-      {images.length === 0 ? (
+      {loading ? (
+        <p className="text-gray-500">Loading...</p>
+      ) : error ? (
+        <div className="bg-red-100 text-red-700 p-4 rounded-lg">
+          Terjadi kesalahan: {error}
+        </div>
+      ) : images.length === 0 ? (
         <>
           {/* Empty State */}
-          <div className="bg-[#1D4ED8] text-white p-8 rounded-2xl flex items-center justify-center gap-4 shadow-lg">
+          <div className="bg-blue-600 text-white p-8 rounded-2xl flex items-center justify-center gap-4 shadow-lg">
             <img
               src="/what.png"
               alt="Empty"
@@ -47,7 +65,6 @@ export default function HeroManagement() {
             </p>
           </div>
 
-          {/* Tombol di luar container */}
           <div className="flex justify-end mt-4 gap-3">
             <button
               onClick={() => setShowEmptyDelete(true)}
@@ -79,7 +96,6 @@ export default function HeroManagement() {
         />
       )}
 
-      {/* Modal Upload */}
       {showUpload && (
         <HeroUploadModal
           onClose={() => setShowUpload(false)}
@@ -87,7 +103,6 @@ export default function HeroManagement() {
         />
       )}
 
-      {/* Modal Delete */}
       {deleteTarget && (
         <ConfirmDeleteModal
           target={deleteTarget}
@@ -100,7 +115,6 @@ export default function HeroManagement() {
         />
       )}
 
-      {/* Modal Empty Delete */}
       {showEmptyDelete && (
         <EmptyDeleteModal onClose={() => setShowEmptyDelete(false)} />
       )}

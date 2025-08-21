@@ -1,3 +1,4 @@
+// src/app/(dashboard)/dashboard/admin/beranda/hero/ConfirmDeleteModal.tsx
 interface HeroImage {
   _id?: string;
   url: string;

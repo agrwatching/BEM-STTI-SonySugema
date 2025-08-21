@@ -1,3 +1,4 @@
+// src/components/beranda/Hero.tsx
 'use client'
 
 import { useEffect, useState } from 'react'
@@ -37,7 +38,7 @@ export default function Hero() {
     if (images.length === 0) return
     const interval = setInterval(() => {
       setCurrentIndex(prev => (prev + 1) % images.length)
-    }, 5000)
+    }, 10000)
     return () => clearInterval(interval)
   }, [images])
 
@@ -68,8 +69,8 @@ export default function Hero() {
     return (
       <section className="relative w-full aspect-[16/9] bg-gray-800 flex flex-col items-center justify-center text-white px-4">
         <Image src="/what.png" alt="Kosong" width={100} height={100} className="mb-4" />
-        <p className="text-lg font-semibold mb-2">Belum ada hero section</p>
-        <p className="text-sm text-gray-300">Silakan tambahkan gambar melalui halaman admin.</p>
+        <p className="text-lg font-semibold mb-2">Waduh mohon maaf sepertinya gambar belum tersedia</p>
+        <p className="text-sm text-gray-300">Silakan hubungi admin.</p>
       </section>
     )
   }

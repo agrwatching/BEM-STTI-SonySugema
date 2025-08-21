@@ -1,8 +1,9 @@
+// src/app/(dashboard)/dashboard/admin/beranda/hero/HeroList.tsx
 "use client";
 
 import { DragDropContext, Droppable, Draggable, DropResult } from "@hello-pangea/dnd";
 import { useState } from "react";
-import { GripVertical } from "lucide-react";
+import { GripVertical, Trash2, Menu } from "lucide-react";
 
 interface HeroImage {
   _id?: string;
@@ -15,11 +16,12 @@ interface HeroListProps {
   images: HeroImage[];
   onAdd: () => void;
   onDelete: (img: HeroImage) => void;
-  onReorder: (newOrder: HeroImage[]) => void; // callback untuk simpan urutan baru
+  onReorder: (newOrder: HeroImage[]) => void;
 }
 
 export default function HeroList({ images, onAdd, onDelete, onReorder }: HeroListProps) {
   const [items, setItems] = useState(images);
+  const [deleteMode, setDeleteMode] = useState(false); // mode hapus aktif atau tidak
 
   const handleDragEnd = (result: DropResult) => {
     if (!result.destination) return;
@@ -29,7 +31,15 @@ export default function HeroList({ images, onAdd, onDelete, onReorder }: HeroLis
     newItems.splice(result.destination.index, 0, moved);
 
     setItems(newItems);
-    onReorder(newItems); // update ke parent (supaya bisa simpan ke backend)
+    onReorder(newItems);
+  };
+
+  const toggleDeleteMode = () => setDeleteMode(!deleteMode);
+
+  const handleDeleteClick = (img: HeroImage) => {
+    const newItems = items.filter((item) => item._id !== img._id);
+    setItems(newItems);
+    onDelete(img);
   };
 
   return (
@@ -50,13 +60,24 @@ export default function HeroList({ images, onAdd, onDelete, onReorder }: HeroLis
                         <img src={img.url} alt={img.name} className="w-10 h-10 rounded-full" />
                         <span>{img.name || "Untitled"}</span>
                       </div>
+
                       <div className="flex items-center gap-4">
                         <span className="text-sm text-gray-500">
                           {img.createdAt ? new Date(img.createdAt).toLocaleDateString() : ""}
                         </span>
-                        <div {...provided.dragHandleProps} className="cursor-grab">
-                          <GripVertical size={20} />
-                        </div>
+
+                        {deleteMode ? (
+                          <button
+                            onClick={() => handleDeleteClick(img)}
+                            className="text-red-500 hover:text-red-600"
+                          >
+                            <Trash2 size={20} />
+                          </button>
+                        ) : (
+                          <div {...provided.dragHandleProps} className="cursor-grab">
+                            <GripVertical size={20} />
+                          </div>
+                        )}
                       </div>
                     </div>
                   )}
@@ -71,10 +92,13 @@ export default function HeroList({ images, onAdd, onDelete, onReorder }: HeroLis
       {/* Tombol Aksi */}
       <div className="flex justify-end gap-3 mt-6">
         <button
-          onClick={() => onDelete(items[0])}
-          className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded"
+          onClick={toggleDeleteMode}
+          className={`px-4 py-2 rounded ${
+            deleteMode ? "bg-red-500 hover:bg-red-600 text-white" : "bg-red-600 hover:bg-red-700 text-white"
+          } flex items-center gap-2`}
         >
-          Hapus
+          {deleteMode ? <Trash2 size={16} /> : <Trash2 size={16} />}
+          {deleteMode ? "Cancel" : "Hapus"}
         </button>
         <button
           onClick={onAdd}
