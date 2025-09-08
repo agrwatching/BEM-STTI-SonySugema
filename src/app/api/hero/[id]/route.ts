@@ -5,28 +5,45 @@ import cloudinary from "@/lib/cloudinary";
 
 export const runtime = "nodejs";
 
-export async function DELETE(_: NextRequest, { params }: { params: { id: string } }) {
+export async function DELETE(
+  _: NextRequest,
+  context: { params: Promise<{ id: string }> }
+) {
   try {
-    const id = params.id;
+    const { id } = await context.params;
+
     if (!ObjectId.isValid(id)) {
-      return NextResponse.json({ error: "Invalid id format" }, { status: 400 });
+      return NextResponse.json(
+        { error: "Invalid id format" },
+        { status: 400 }
+      );
     }
 
     const client = await clientPromise;
     const db = client.db("bemstti");
 
-    const hero = await db.collection("heroes").findOne({ _id: new ObjectId(id) });
-    if (!hero) return NextResponse.json({ error: "Hero not found" }, { status: 404 });
+    const hero = await db
+      .collection("heroes")
+      .findOne({ _id: new ObjectId(id) });
+    if (!hero) {
+      return NextResponse.json(
+        { error: "Hero not found" },
+        { status: 404 }
+      );
+    }
 
-    // Hapus dari Cloudinary
-    if (hero.public_id) await cloudinary.uploader.destroy(hero.public_id);
+    // hapus dari Cloudinary
+    if (hero.public_id) {
+      await cloudinary.uploader.destroy(hero.public_id);
+    }
 
-    // Hapus dari MongoDB
+    // hapus dari MongoDB
     await db.collection("heroes").deleteOne({ _id: new ObjectId(id) });
 
     return NextResponse.json({ success: true });
   } catch (err: unknown) {
-    const errorMessage = err instanceof Error ? err.message : "Internal Server Error";
+    const errorMessage =
+      err instanceof Error ? err.message : "Internal Server Error";
     return NextResponse.json({ error: errorMessage }, { status: 500 });
   }
 }

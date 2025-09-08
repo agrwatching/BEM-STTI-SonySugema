@@ -16,7 +16,8 @@ export async function GET() {
 
     return NextResponse.json(heroes);
   } catch (err: unknown) {
-    const errorMessage = err instanceof Error ? err.message : "Internal Server Error";
+    const errorMessage =
+      err instanceof Error ? err.message : "Internal Server Error";
     return NextResponse.json({ error: errorMessage }, { status: 500 });
   }
 }
