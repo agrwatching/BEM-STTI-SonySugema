@@ -1,7 +1,5 @@
-// src/app/api/divisi/route.ts
 import { NextResponse } from "next/server";
 import clientPromise from "@/lib/mongodb";
-import { ObjectId } from "mongodb";
 
 function docToJson(doc: any) {
   if (!doc) return null;
@@ -17,7 +15,7 @@ function docToJson(doc: any) {
   };
 }
 
-// GET semua divisi
+// ✅ GET semua divisi
 export async function GET() {
   try {
     const client = await clientPromise;
@@ -28,11 +26,14 @@ export async function GET() {
     return NextResponse.json(jsonable);
   } catch (err) {
     console.error(err);
-    return NextResponse.json({ error: "Gagal mengambil data divisi" }, { status: 500 });
+    return NextResponse.json(
+      { error: "Gagal mengambil data divisi" },
+      { status: 500 }
+    );
   }
 }
 
-// POST tambah divisi baru
+// ✅ Tambah divisi baru
 export async function POST(req: Request) {
   try {
     const body = await req.json();
@@ -53,6 +54,9 @@ export async function POST(req: Request) {
     return NextResponse.json(docToJson(inserted));
   } catch (err) {
     console.error(err);
-    return NextResponse.json({ error: "Gagal menambahkan divisi" }, { status: 500 });
+    return NextResponse.json(
+      { error: "Gagal menambahkan divisi" },
+      { status: 500 }
+    );
   }
 }

@@ -1,4 +1,3 @@
-// src/app/api/divisi/[id]/route.ts
 import { NextResponse } from "next/server";
 import clientPromise from "@/lib/mongodb";
 import { ObjectId } from "mongodb";
@@ -17,8 +16,12 @@ function docToJson(doc: any) {
   };
 }
 
-export async function PUT(req: Request, { params }: { params: { id: string } }) {
-  const id = params.id;
+// ✅ Update divisi
+export async function PUT(
+  req: Request,
+  context: { params: Promise<{ id: string }> }
+) {
+  const { id } = await context.params;
   if (!ObjectId.isValid(id)) {
     return NextResponse.json({ error: "Invalid id" }, { status: 400 });
   }
@@ -35,23 +38,33 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
 
     const updateRes = await col.updateOne(
       { _id: new ObjectId(id) },
-      { $set: updateFields }
+      { $set: updateFields } as any
     );
 
     if (updateRes.matchedCount === 0) {
-      return NextResponse.json({ error: "Divisi tidak ditemukan" }, { status: 404 });
+      return NextResponse.json(
+        { error: "Divisi tidak ditemukan" },
+        { status: 404 }
+      );
     }
 
     const updatedDoc = await col.findOne({ _id: new ObjectId(id) });
     return NextResponse.json(docToJson(updatedDoc));
   } catch (err) {
     console.error(err);
-    return NextResponse.json({ error: "Gagal update divisi" }, { status: 500 });
+    return NextResponse.json(
+      { error: "Gagal update divisi" },
+      { status: 500 }
+    );
   }
 }
 
-export async function DELETE(_: Request, { params }: { params: { id: string } }) {
-  const id = params.id;
+// ✅ Hapus divisi
+export async function DELETE(
+  _: Request,
+  context: { params: Promise<{ id: string }> }
+) {
+  const { id } = await context.params;
   if (!ObjectId.isValid(id)) {
     return NextResponse.json({ error: "Invalid id" }, { status: 400 });
   }
@@ -63,12 +76,18 @@ export async function DELETE(_: Request, { params }: { params: { id: string } })
 
     const del = await col.deleteOne({ _id: new ObjectId(id) });
     if (del.deletedCount === 0) {
-      return NextResponse.json({ error: "Divisi tidak ditemukan" }, { status: 404 });
+      return NextResponse.json(
+        { error: "Divisi tidak ditemukan" },
+        { status: 404 }
+      );
     }
 
     return NextResponse.json({ success: true });
   } catch (err) {
     console.error(err);
-    return NextResponse.json({ error: "Gagal hapus divisi" }, { status: 500 });
+    return NextResponse.json(
+      { error: "Gagal hapus divisi" },
+      { status: 500 }
+    );
   }
 }
