@@ -17,9 +17,12 @@ function docToJson(doc: any) {
   };
 }
 
-// Tambah proker ke divisi tertentu
-export async function POST(req: Request, { params }: { params: { id: string } }) {
-  const id = params.id;
+// ✅ Tambah proker ke divisi tertentu
+export async function POST(
+  req: Request,
+  context: { params: Promise<{ id: string }> }
+) {
+  const { id } = await context.params;
   if (!ObjectId.isValid(id)) {
     return NextResponse.json({ error: "Invalid id" }, { status: 400 });
   }
@@ -34,31 +37,36 @@ export async function POST(req: Request, { params }: { params: { id: string } })
     const newProker = {
       _id: new ObjectId(),
       nama: typeof body?.nama === "string" ? body.nama : "Judul Baru",
-      deskripsi: typeof body?.deskripsi === "string" ? body.deskripsi : "Deskripsi Baru",
+      deskripsi:
+        typeof body?.deskripsi === "string"
+          ? body.deskripsi
+          : "Deskripsi Baru",
       createdAt: now,
       updatedAt: now,
     };
 
-    const res = await col.updateOne(
+    await col.updateOne(
       { _id: new ObjectId(id) },
       { $push: { proker: newProker }, $set: { updatedAt: now } } as any
     );
-
-    if (res.matchedCount === 0) {
-      return NextResponse.json({ error: "Divisi tidak ditemukan" }, { status: 404 });
-    }
 
     const updatedDoc = await col.findOne({ _id: new ObjectId(id) });
     return NextResponse.json(docToJson(updatedDoc));
   } catch (err) {
     console.error(err);
-    return NextResponse.json({ error: "Gagal menambah proker" }, { status: 500 });
+    return NextResponse.json(
+      { error: "Gagal menambah proker" },
+      { status: 500 }
+    );
   }
 }
 
-// Update proker tertentu
-export async function PUT(req: Request, { params }: { params: { id: string } }) {
-  const id = params.id;
+// ✅ Update proker tertentu
+export async function PUT(
+  req: Request,
+  context: { params: Promise<{ id: string }> }
+) {
+  const { id } = await context.params;
   if (!ObjectId.isValid(id)) {
     return NextResponse.json({ error: "Invalid id" }, { status: 400 });
   }
@@ -88,20 +96,29 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
     );
 
     if (updateRes.matchedCount === 0) {
-      return NextResponse.json({ error: "Divisi atau Proker tidak ditemukan" }, { status: 404 });
+      return NextResponse.json(
+        { error: "Divisi atau Proker tidak ditemukan" },
+        { status: 404 }
+      );
     }
 
     const updatedDoc = await col.findOne({ _id: new ObjectId(id) });
     return NextResponse.json(docToJson(updatedDoc));
   } catch (err) {
     console.error(err);
-    return NextResponse.json({ error: "Gagal update proker" }, { status: 500 });
+    return NextResponse.json(
+      { error: "Gagal update proker" },
+      { status: 500 }
+    );
   }
 }
 
-// Hapus proker tertentu
-export async function DELETE(req: Request, { params }: { params: { id: string } }) {
-  const id = params.id;
+// ✅ Hapus proker tertentu
+export async function DELETE(
+  req: Request,
+  context: { params: Promise<{ id: string }> }
+) {
+  const { id } = await context.params;
   if (!ObjectId.isValid(id)) {
     return NextResponse.json({ error: "Invalid id" }, { status: 400 });
   }
@@ -124,13 +141,19 @@ export async function DELETE(req: Request, { params }: { params: { id: string } 
     );
 
     if (pullRes.matchedCount === 0) {
-      return NextResponse.json({ error: "Divisi tidak ditemukan" }, { status: 404 });
+      return NextResponse.json(
+        { error: "Divisi tidak ditemukan" },
+        { status: 404 }
+      );
     }
 
     const updatedDoc = await col.findOne({ _id: new ObjectId(id) });
     return NextResponse.json(docToJson(updatedDoc));
   } catch (err) {
     console.error(err);
-    return NextResponse.json({ error: "Gagal menghapus proker" }, { status: 500 });
+    return NextResponse.json(
+      { error: "Gagal menghapus proker" },
+      { status: 500 }
+    );
   }
 }
