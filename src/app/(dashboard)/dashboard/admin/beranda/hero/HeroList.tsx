@@ -1,9 +1,8 @@
-// src/app/(dashboard)/dashboard/admin/beranda/hero/HeroList.tsx
 "use client";
 
 import { DragDropContext, Droppable, Draggable, DropResult } from "@hello-pangea/dnd";
-import { useState } from "react";
-import { GripVertical, Trash2, Menu } from "lucide-react";
+import { useState, useEffect } from "react";
+import { GripVertical, Trash2 } from "lucide-react";
 
 interface HeroImage {
   _id?: string;
@@ -20,8 +19,13 @@ interface HeroListProps {
 }
 
 export default function HeroList({ images, onAdd, onDelete, onReorder }: HeroListProps) {
+  const [deleteMode, setDeleteMode] = useState(false);
+
+  // Sinkronisasi state lokal jika prop images berubah
   const [items, setItems] = useState(images);
-  const [deleteMode, setDeleteMode] = useState(false); // mode hapus aktif atau tidak
+  useEffect(() => {
+    setItems(images);
+  }, [images]);
 
   const handleDragEnd = (result: DropResult) => {
     if (!result.destination) return;
@@ -35,12 +39,6 @@ export default function HeroList({ images, onAdd, onDelete, onReorder }: HeroLis
   };
 
   const toggleDeleteMode = () => setDeleteMode(!deleteMode);
-
-  const handleDeleteClick = (img: HeroImage) => {
-    const newItems = items.filter((item) => item._id !== img._id);
-    setItems(newItems);
-    onDelete(img);
-  };
 
   return (
     <div className="bg-blue-600 p-6 rounded-lg text-white">
@@ -68,7 +66,7 @@ export default function HeroList({ images, onAdd, onDelete, onReorder }: HeroLis
 
                         {deleteMode ? (
                           <button
-                            onClick={() => handleDeleteClick(img)}
+                            onClick={() => onDelete(img)}
                             className="text-red-500 hover:text-red-600"
                           >
                             <Trash2 size={20} />
@@ -97,7 +95,7 @@ export default function HeroList({ images, onAdd, onDelete, onReorder }: HeroLis
             deleteMode ? "bg-red-500 hover:bg-red-600 text-white" : "bg-red-600 hover:bg-red-700 text-white"
           } flex items-center gap-2`}
         >
-          {deleteMode ? <Trash2 size={16} /> : <Trash2 size={16} />}
+          <Trash2 size={16} />
           {deleteMode ? "Cancel" : "Hapus"}
         </button>
         <button
