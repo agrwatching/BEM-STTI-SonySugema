@@ -38,7 +38,7 @@ export default function AdminSidebar({ onLogout }: SidebarProps) {
 
         {/* Scrollable Menu Area */}
         <nav
-          className="flex flex-col p-4 space-y-2 overflow-y-auto"
+          className="flex flex-col p-4 space-y-2 overflow-y-auto scrollbar-hide"
           style={{ maxHeight: 'calc(100vh - 8rem)' }} // 64px header + 64px footer = 128px = 8rem
         >
           {/* Dashboard Admin */}

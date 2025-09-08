@@ -19,7 +19,7 @@ export default function SubadminSidebar({ onLogout }: SidebarProps) {
         <h2 className="text-2xl font-bold p-4 border-b border-gray-700">
           SUBADMIN MENU
         </h2>
-        <nav className="flex flex-col p-4 space-y-2">
+        <nav className="flex flex-col p-4 space-y-2 scrollbar-hide">
           {menus.map((menu) => (
             <Link
               key={menu.label}

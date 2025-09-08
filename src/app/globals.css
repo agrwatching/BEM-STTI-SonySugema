@@ -85,3 +85,13 @@ body {
 }
 
 /* Neon border untuk tombol di navbar */
+
+/* src/app/globals.css */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* IE dan Edge */
+  scrollbar-width: none;  /* Firefox */
+}
