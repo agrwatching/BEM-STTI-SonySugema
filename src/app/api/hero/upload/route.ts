@@ -7,7 +7,7 @@ export const runtime = "nodejs";
 export async function POST(req: Request) {
   try {
     const client = await clientPromise;
-    const db = client.db("your_db_name");
+    const db = client.db("bemstti");
 
     const formData = await req.formData();
     const file = formData.get("file") as File | null;
@@ -22,10 +22,13 @@ export async function POST(req: Request) {
       }).end(buffer);
     });
 
+    // Ambil jumlah data untuk urutan
+    const count = await db.collection("heroes").countDocuments();
+
     const heroDoc = {
       url: uploadRes.secure_url,
       public_id: uploadRes.public_id,
-      order: 0,
+      order: count, // urut otomatis
       isActive: true,
       createdAt: new Date(),
     };

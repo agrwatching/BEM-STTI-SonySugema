@@ -7,11 +7,16 @@ export const runtime = "nodejs";
 export async function POST(req: Request) {
   try {
     const client = await clientPromise;
-    const db = client.db("your_db_name");
+    const db = client.db("bemstti");
 
     const ids: string[] = await req.json();
 
+    if (!Array.isArray(ids) || ids.length === 0) {
+      return NextResponse.json({ error: "Invalid ids" }, { status: 400 });
+    }
+
     for (let i = 0; i < ids.length; i++) {
+      if (!ObjectId.isValid(ids[i])) continue;
       await db.collection("heroes").updateOne(
         { _id: new ObjectId(ids[i]) },
         { $set: { order: i } }

@@ -15,7 +15,7 @@ export default function Hero() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
-  // Ambil gambar dari API
+  // Fetch data gambar dari API
   useEffect(() => {
     const fetchImages = async () => {
       try {
@@ -33,7 +33,7 @@ export default function Hero() {
     fetchImages()
   }, [])
 
-  // Auto ganti slide setiap 5 detik
+  // Auto ganti slide
   useEffect(() => {
     if (images.length === 0) return
     const interval = setInterval(() => {
@@ -42,16 +42,20 @@ export default function Hero() {
     return () => clearInterval(interval)
   }, [images])
 
+  // Fungsi optimasi URL Cloudinary
+  const getOptimizedUrl = (url: string, w = 1920) =>
+    url.replace('/upload/', `/upload/f_auto,q_auto,w_${w}/`)
+
   // Loading state
   if (loading) {
     return (
       <section className="relative w-full aspect-[16/9] bg-gray-800 flex items-center justify-center text-white">
-        <p>Memuat hero section...</p>
+        <p>Memuat section...</p>
       </section>
     )
   }
 
-  // Jika ada error
+  // Jika error
   if (error) {
     return (
       <section className="relative w-full aspect-[16/9] bg-gray-900 flex items-center justify-center text-center text-white px-4">
@@ -75,29 +79,45 @@ export default function Hero() {
     )
   }
 
+  // Ambil gambar aktif + preload 1 berikutnya
+  const currentImage = images[currentIndex]
+  const nextImage = images[(currentIndex + 1) % images.length]
+
   return (
     <section className="relative w-full aspect-[16/9] overflow-hidden z-10">
-      {/* Background Images */}
-      {images.map((img, index) => (
-        <Image
-          key={img._id}
-          src={img.url}
-          alt={`Slide ${index + 1}`}
-          fill
-          className={`absolute object-cover transition-opacity duration-1000 ease-in-out ${
-            index === currentIndex ? 'opacity-100 z-10' : 'opacity-0 z-0'
-          }`}
-        />
-      ))}
+      {/* Gambar aktif */}
+      <Image
+        key={currentImage._id}
+        src={getOptimizedUrl(currentImage.url)}
+        alt={`Slide ${currentIndex + 1}`}
+        fill
+        priority
+        placeholder="blur"
+        blurDataURL={getOptimizedUrl(currentImage.url, 20)} // thumbnail super kecil
+        className="absolute object-cover transition-opacity duration-1000 ease-in-out opacity-100 z-10"
+      />
 
-      {/* Overlay */}
+      {/* Preload gambar berikutnya (lazy) */}
+      <Image
+        key={nextImage._id}
+        src={getOptimizedUrl(nextImage.url)}
+        alt={`Slide ${currentIndex + 2}`}
+        fill
+        loading="lazy"
+        placeholder="blur"
+        blurDataURL={getOptimizedUrl(nextImage.url, 20)}
+        className="absolute object-cover opacity-0"
+      />
+
+      {/* Overlay konten */}
       <div className="absolute inset-0 bg-black/60 z-20 flex items-center justify-center text-center px-4 pb-12 md:pb-28">
         <div className="max-w-5xl">
           <p className="text-white text-xs md:text-2xl md:mb-4 mb-0 font-extrabold tracking-wide uppercase">
             Senat STTI Sony Sugema 2025
           </p>
           <h1 className="text-white text-3xl md:text-7xl font-extrabold">
-            KABINET <span className="bg-gradient-to-r from-green-400 via-cyan-400 to-blue-500 text-transparent bg-clip-text drop-shadow-md">
+            KABINET{' '}
+            <span className="bg-gradient-to-r from-green-400 via-cyan-400 to-blue-500 text-transparent bg-clip-text drop-shadow-md">
               TUNAS LANGIT
             </span>
           </h1>

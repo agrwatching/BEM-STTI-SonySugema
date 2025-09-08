@@ -6,7 +6,7 @@ export const runtime = "nodejs";
 export async function GET() {
   try {
     const client = await clientPromise;
-    const db = client.db("your_db_name");
+    const db = client.db("bemstti");
 
     const heroes = await db
       .collection("heroes")
