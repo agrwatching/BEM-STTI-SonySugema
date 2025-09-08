@@ -12,7 +12,6 @@ interface HeroImage {
 export default function Hero() {
   const [images, setImages] = useState<HeroImage[]>([])
   const [currentIndex, setCurrentIndex] = useState(0)
-  const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
   // Fetch data gambar dari API
@@ -26,8 +25,6 @@ export default function Hero() {
       } catch (err) {
         console.error(err)
         setError('Gagal memuat gambar hero. Silakan coba lagi nanti.')
-      } finally {
-        setLoading(false)
       }
     }
     fetchImages()
@@ -45,15 +42,6 @@ export default function Hero() {
   // Fungsi optimasi URL Cloudinary
   const getOptimizedUrl = (url: string, w = 1920) =>
     url.replace('/upload/', `/upload/f_auto,q_auto,w_${w}/`)
-
-  // Loading state
-  if (loading) {
-    return (
-      <section className="relative w-full aspect-[16/9] bg-gray-800 flex items-center justify-center text-white">
-        <p>Memuat section...</p>
-      </section>
-    )
-  }
 
   // Jika error
   if (error) {
@@ -93,7 +81,7 @@ export default function Hero() {
         fill
         priority
         placeholder="blur"
-        blurDataURL={getOptimizedUrl(currentImage.url, 20)} // thumbnail super kecil
+        blurDataURL={getOptimizedUrl(currentImage.url, 20)}
         className="absolute object-cover transition-opacity duration-1000 ease-in-out opacity-100 z-10"
       />
 
