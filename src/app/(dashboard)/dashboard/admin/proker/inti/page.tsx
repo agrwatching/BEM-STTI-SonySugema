@@ -14,28 +14,25 @@ type Proker = {
 
 export default function SenatProkerPage() {
   const [senatProker, setSenatProker] = useState<Proker[]>([]);
-  const [loading, setLoading] = useState(true);
 
   // state buat confirm delete
   const [confirmId, setConfirmId] = useState<string | null>(null);
   const [confirmText, setConfirmText] = useState("");
 
-  // fetch data
+  // fetch data awal
   useEffect(() => {
     const fetchData = async () => {
       try {
         const res = await fetch("/api/proker?type=senat");
         const data = await res.json();
-        // pastikan semua item dimulai dengan isEditing: false
         const cleanData = (data || []).map((p: Proker) => ({
           ...p,
           isEditing: false,
+          backup: { nama: p.nama, deskripsi: p.deskripsi },
         }));
         setSenatProker(cleanData);
       } catch (err) {
         console.error("Gagal fetch proker senat:", err);
-      } finally {
-        setLoading(false);
       }
     };
     fetchData();
@@ -43,47 +40,72 @@ export default function SenatProkerPage() {
 
   // tambah
   const tambahSenatProker = async () => {
-    const newProker: Proker = {
-      nama: "Masukan judul",
-      deskripsi: "Masukan deskripsi",
-      isEditing: true,
-      backup: { nama: "Masukan judul", deskripsi: "Masukan deskripsi" },
-    };
-    const res = await fetch("/api/proker", {
-      method: "POST",
-      body: JSON.stringify({ ...newProker, type: "senat" }),
-    });
-    const saved = await res.json();
-    // tambahin ke state dengan isEditing true
-    setSenatProker([...senatProker, { ...saved, isEditing: true }]);
+    try {
+      const res = await fetch("/api/proker", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          nama: "Masukan judul",
+          deskripsi: "Masukan deskripsi",
+          type: "senat",
+        }),
+      });
+      const saved = await res.json();
+      setSenatProker((prev) => [
+        ...prev,
+        {
+          ...saved,
+          isEditing: true,
+          backup: { nama: saved.nama, deskripsi: saved.deskripsi },
+        },
+      ]);
+    } catch (err) {
+      console.error("Gagal tambah proker senat:", err);
+    }
   };
 
   // update di state
   const updateSenatProker = (id: string, field: keyof Proker, value: string) => {
-    setSenatProker(
-      senatProker.map((p) => (p._id === id ? { ...p, [field]: value } : p))
+    setSenatProker((prev) =>
+      prev.map((p) => (p._id === id ? { ...p, [field]: value } : p))
     );
   };
 
-  // save ke db
+  // save
   const saveSenatProker = async (id: string) => {
     const target = senatProker.find((p) => p._id === id);
     if (!target) return;
-    await fetch(`/api/proker/${id}`, {
-      method: "PUT",
-      body: JSON.stringify(target),
-    });
-    setSenatProker(
-      senatProker.map((p) =>
-        p._id === id ? { ...p, isEditing: false, backup: { nama: p.nama, deskripsi: p.deskripsi } } : p
-      )
-    );
+    try {
+      const res = await fetch(`/api/proker/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          nama: target.nama,
+          deskripsi: target.deskripsi,
+          type: "senat",
+        }),
+      });
+      const updated = await res.json();
+      setSenatProker((prev) =>
+        prev.map((p) =>
+          p._id === id
+            ? {
+                ...updated,
+                isEditing: false,
+                backup: { nama: updated.nama, deskripsi: updated.deskripsi },
+              }
+            : p
+        )
+      );
+    } catch (err) {
+      console.error("Gagal update proker senat:", err);
+    }
   };
 
   // cancel edit
   const cancelSenatProker = (id: string) => {
-    setSenatProker(
-      senatProker.map((p) =>
+    setSenatProker((prev) =>
+      prev.map((p) =>
         p._id === id
           ? {
               ...p,
@@ -98,11 +120,13 @@ export default function SenatProkerPage() {
 
   // delete
   const deleteSenatProker = async (id: string) => {
-    await fetch(`/api/proker/${id}`, { method: "DELETE" });
-    setSenatProker(senatProker.filter((p) => p._id !== id));
+    try {
+      await fetch(`/api/proker/${id}`, { method: "DELETE" });
+      setSenatProker((prev) => prev.filter((p) => p._id !== id));
+    } catch (err) {
+      console.error("Gagal hapus proker senat:", err);
+    }
   };
-
-  if (loading) return <p className="p-6">Loading...</p>;
 
   return (
     <div className="border rounded-xl p-6">
@@ -115,6 +139,7 @@ export default function SenatProkerPage() {
           <Plus size={16} />
         </button>
       </div>
+
       <div className="space-y-4">
         {senatProker.map((p) => (
           <div
@@ -165,13 +190,16 @@ export default function SenatProkerPage() {
               ) : (
                 <button
                   onClick={() =>
-                    setSenatProker(
-                      senatProker.map((item) =>
+                    setSenatProker((prev) =>
+                      prev.map((item) =>
                         item._id === p._id
                           ? {
                               ...item,
                               isEditing: true,
-                              backup: { nama: item.nama, deskripsi: item.deskripsi },
+                              backup: {
+                                nama: item.nama,
+                                deskripsi: item.deskripsi,
+                              },
                             }
                           : item
                       )
