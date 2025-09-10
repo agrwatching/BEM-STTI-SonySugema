@@ -1,4 +1,4 @@
-// src/app/page.tsx
+// src/app/(public)/page.tsx
 export const metadata = {
   title: "Beranda | Senat Mahasiswa STTI Sony Sugema",
   description: "Selamat datang di website resmi Senat Mahasiswa STTI Sony Sugema. Temukan informasi terbaru seputar kegiatan dan organisasi kami.",
