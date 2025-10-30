@@ -1,3 +1,4 @@
+// src/app/api/hero/[id]/route.ts
 import { NextResponse, NextRequest } from "next/server";
 import clientPromise from "@/lib/mongodb";
 import { ObjectId } from "mongodb";
